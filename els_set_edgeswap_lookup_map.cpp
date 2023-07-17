@@ -255,7 +255,7 @@ public:
         int mid;
         int elm;
         
-        if (true){
+        if (size < 10){
             for (int i = 0; i < size; i++){
                 elm = neighbours[i];
                 if (in_P(elm)){
