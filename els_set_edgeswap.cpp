@@ -185,7 +185,6 @@ public:
 
     X_P_Set get_exclusion(int* neighbours, int size){
         int new_p_size = P_size;
-        int new_x_size = X_size;
         int org_undo_size = undo_queue.size();
         for (int i = 0; i < size; i++){
             int elm = neighbours[i];
@@ -194,12 +193,9 @@ public:
                 do_swap(get_Pi(new_p_size-1), elm);
                 new_p_size--;
             }
-            else if (in_X(elm)){
-                do_swap(get_Xi(new_x_size-1), elm);
-                new_x_size--;
-            }
+            else break;
         }
-        return X_P_Set(*this, new_x_size, new_p_size, org_undo_size);
+        return X_P_Set(*this, X_size, new_p_size, org_undo_size);
     };
 
     //precondition is that element is in P

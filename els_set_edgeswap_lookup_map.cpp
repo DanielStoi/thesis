@@ -255,7 +255,7 @@ public:
         int mid;
         int elm;
         
-        if (size < 10){
+        if (size < 10 ){
             for (int i = 0; i < size; i++){
                 elm = neighbours[i];
                 if (in_P(elm)){
@@ -298,10 +298,7 @@ public:
                 do_swap(get_Pi(new_p_size-1), elm);
                 new_p_size--;
             }
-            else if (in_X(elm)){
-                do_swap(get_Xi(new_x_size-1), elm);
-                new_x_size--;
-            }
+            else break;
         }
         return X_P_Set(*this, new_x_size, new_p_size, org_undo_size);
     };
