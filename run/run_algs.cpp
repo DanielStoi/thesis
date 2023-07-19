@@ -7,6 +7,7 @@
 #include "../BronKerboschOrdering.cpp"
 #include "../BronKerbosch.cpp"
 #include "../BronKerboschPivotlist.cpp"
+#include "../BronKerboschPivotlist_P_only.cpp"
 #include "../BronKerboschEquivReduction.cpp"
 #include "../graph.h"
 #include "../correct_imp.cpp"
@@ -49,6 +50,12 @@ int main(int argc, char** argv){
     }
     else if (strcmp(argv[2], "pivotopt") == 0){
         ans = BronKerboschPivot(g, true).solve();
+    }
+    else if (strcmp(argv[2], "p_pivot_adj_ord") == 0){
+        ans = BronKerboschPivot_P_only(g, true).solve();
+    }
+    else if (strcmp(argv[2], "p_pivotopt_adj_ord") == 0){
+        ans = BronKerboschPivot_P_only(g, true).solve();
     }
     else if (strcmp(argv[2], "degen") == 0){
         ans = BronKerboschDegen(g, false).solve();

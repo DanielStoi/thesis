@@ -5,7 +5,7 @@
 #include <algorithm>
 
 
-#include "../BronKerboschPivotList.cpp"
+#include "../BronKerboschPivotlist_P_only.cpp"
 #include "../graph.h"
 #include "../correct_imp.cpp"
 
@@ -41,10 +41,10 @@ int main(int argc, char** argv){
     int ans = 0;
 
     if (strcmp(argv[2], "pivot") == 0){
-        ans = BronKerboschPivot(g, false).solve();
+        ans = BronKerboschPivot_P_only(g, false).solve();
     }
     else if (strcmp(argv[2], "pivotopt") == 0){
-        ans = BronKerboschPivot(g, true).solve();
+        ans = BronKerboschPivot_P_only(g, true).solve();
     }
     else if (strcmp(argv[2], "correct") == 0){
         auto c = correctImp();

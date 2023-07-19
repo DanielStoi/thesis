@@ -12,6 +12,7 @@ A  Currently used XP set implementation that stores an undo queue
 #include <cstdlib>
 #include <vector>
 #include <iostream>
+#include "graph.h"
 
 #pragma once
 
@@ -33,7 +34,7 @@ public:
 
 
     //adds all elements to P by default
-    X_P_Set(int n):
+    X_P_Set(int n, Graph& g):
     n(n), X_size(0), P_start(0), P_size(n), lookup(*new vector<int>(n, -1)), vals(*new vector<int>(n, -1)), undo_queue(*new vector<int>()){
         for (int i = 0; i<n; i++){
             lookup[i]=i;
