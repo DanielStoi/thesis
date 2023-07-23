@@ -27,6 +27,7 @@ public:
     vector<int>& lookup; //table index->loc of element (-1 if doesn't exist within table)
     vector<int>& vals;  // raw combined array of X,P sets
     vector<int>& undo_queue; //queue for undoing moves
+    Graph& g;
     int X_size;
     int P_start;
     int P_size;
@@ -35,7 +36,7 @@ public:
 
     //adds all elements to P by default
     X_P_Set(int n, Graph& g):
-    n(n), X_size(0), P_start(0), P_size(n), lookup(*new vector<int>(n, -1)), vals(*new vector<int>(n, -1)), undo_queue(*new vector<int>()){
+    n(n), X_size(0), P_start(0), P_size(n), lookup(*new vector<int>(n, -1)), vals(*new vector<int>(n, -1)), undo_queue(*new vector<int>()), g(g){
         for (int i = 0; i<n; i++){
             lookup[i]=i;
             vals[i]=i;
@@ -52,7 +53,8 @@ public:
         X_size(X_size), 
         P_start(s.P_start), 
         P_size(P_size),
-        queue_size(org_queue_size)
+        queue_size(org_queue_size),
+        g(s.g)
     { 
         if (org_queue_size == 0) queue_size = undo_queue.size();
     };
@@ -87,7 +89,10 @@ public:
     }
 
     //iteratate over neigbours and count intersection size and swap 
-    X_P_Set get_intersection(vector<int>& neighbours){ return get_intersection(neighbours.data(), neighbours.size()); }
+    X_P_Set get_intersection(int v){ 
+        vector<int>& ref = g.edges_list[v];
+        return get_intersection(ref.data(), ref.size()); 
+    }
 
     X_P_Set get_intersection(int* neighbours, int size){
         int new_p_size = 0;

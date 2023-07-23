@@ -26,7 +26,7 @@ public:
             included.push_back(v);
             
             {
-                X_P_Set new_XP = XP.get_intersection(g.edges_list[v]);
+                X_P_Set new_XP = XP.get_intersection(v);
                 BronKerboschPivot::solve(included, new_XP);
             }
 

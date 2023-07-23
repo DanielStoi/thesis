@@ -9,26 +9,26 @@
 using namespace std;
 
 
-#ifdef LIST_ELS_SET_LOOKUP
-struct edge_lookup{
-//do unordered_map implementation here
-}
-#else
+//remove or add define to switch between hashmap and list implementations
+//#define USE_HASHMAP_ELS_SET_LOOKUP
+
+
+
+
+#ifdef USE_HASHMAP_ELS_SET_LOOKUP
+//HASHMAP IMPLEMENTATION O(n+m) space
 
 struct edge_lookup{
-    vector<vector<int>> edges;
-    vector<unordered_set<int>> edge_seen;
+    vector<unordered_map<int,int>> edges;
     Graph& g;
     edge_lookup(Graph& g): g(g){
         printf("created\n");
         int n = g.edges_list.size();
-        edges = vector<vector<int>>(n, vector<int>(n,-1));
-        edge_seen = vector<unordered_set<int>>(n);
+        edges = vector<unordered_map<int,int>>(n, unordered_map<int,int>());
         for (int v = 0; v<n; v++){
             int cur = 0;
             for (int e: g.edges_list[v]){
                 edges[v][e] = cur++;
-                edge_seen[v].insert(e);
             }
         }
 
@@ -36,24 +36,7 @@ struct edge_lookup{
     }
 
     void check_valid(){
-        //assert(false);
-        for (int v = 0; v<g.edges_list.size(); v++){
-            for (int e: g.edges_list[v]){
-                assert(g.edges_list[v][edges[v][e]] == e);
-            }
-            for (int e = 0; e< g.edges_list.size(); e++){
-                if (edge_seen[v].find(e) == edge_seen[v].end()){
-                    assert(edges[v][e] == -1);
-                    assert(edges[e][v] == -1);
-                    assert(check_edge_exists(e,v) == false);
-                }
-                else{
-                    assert(edges[v][e] != -1);
-                    assert(edges[e][v] != -1);
-                    assert(check_edge_exists(e,v) == true);
-                }
-            }
-        }
+        // TODO 
     }
 
     bool check_edge_exists(int a1, int a2){
@@ -63,6 +46,59 @@ struct edge_lookup{
         if (max(a1,a2)>=g.edges_list.size()) {
             printf("invaliiid - greater than allowed\n");
         }
+        return edges[a1].count(a2) > 0;
+    }
+
+    bool do_edge_swap(int source, int e1, int e2){
+
+        if (edges[source].count(e1) == 0 || edges[source].count(e2) == 0){
+            printf("invaliiid - one pos doesn't exist\n");
+            return false;
+        }
+
+        int pos1 = edges[source][e1];
+        int pos2 = edges[source][e2];
+        
+        
+        swap(g.edges_list[source][pos1], g.edges_list[source][pos2]);
+        swap(edges[source][e1], edges[source][e2]);
+        //assert(g.edges_list[source][pos1] == e2);
+        //assert(g.edges_list[source][pos2] == e1);
+        return true;
+    }
+
+    ~edge_lookup(){
+        printf("deconstructed\n");
+    }
+};
+
+
+
+
+#else
+//LIST IMPLEMENTATION O(n^2) space
+struct edge_lookup{
+    vector<vector<int>> edges;
+    Graph& g;
+    edge_lookup(Graph& g): g(g){
+        printf("created\n");
+        int n = g.edges_list.size();
+        edges = vector<vector<int>>(n, vector<int>(n,-1));
+        for (int v = 0; v<n; v++){
+            int cur = 0;
+            for (int e: g.edges_list[v]){
+                edges[v][e] = cur++;
+            }
+        }
+
+        check_valid();
+    }
+
+    void check_valid(){
+        // TODO 
+    }
+
+    bool check_edge_exists(int a1, int a2){
         return edges[a1][a2] != -1;
     }
 
@@ -77,8 +113,8 @@ struct edge_lookup{
         }
         swap(g.edges_list[source][pos1], g.edges_list[source][pos2]);
         swap(edges[source][e1], edges[source][e2]);
-        assert(g.edges_list[source][pos1] == e2);
-        assert(g.edges_list[source][pos2] == e1);
+        //assert(g.edges_list[source][pos1] == e2);
+        //assert(g.edges_list[source][pos2] == e1);
         return true;
     }
 

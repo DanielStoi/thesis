@@ -45,7 +45,7 @@ public:
             //calculating params for recursion
             
             {
-                X_P_Set new_XP = XP.get_intersection(g.edges_list[v]);
+                X_P_Set new_XP = XP.get_intersection(v);
                 included.push_back(v);
 
                 //solve recursively

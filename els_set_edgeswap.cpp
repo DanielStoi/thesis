@@ -67,7 +67,10 @@ public:
     }
 
     //iteratate over neigbours and count intersection size and swap 
-    X_P_Set get_intersection(vector<int>& neighbours){ return get_intersection(neighbours.data(), neighbours.size()); }
+    X_P_Set get_intersection(int v){ 
+        vector<int>& ref = g.edges_list[v];
+        return get_intersection(ref.data(), ref.size()); 
+    }
 
     X_P_Set get_intersection(int* neighbours, int size){
         //change from default implementation: need to reorder adjacency list for each n

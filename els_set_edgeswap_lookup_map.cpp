@@ -6,6 +6,9 @@
 
 using namespace std;
 
+
+#define SMART_INTERSECTION_CHOICE
+
 /*
 THIS IS A VERSION OF X_P_sEt_Edgeswap which 
 - reorders the edges in underlying graph (vertices in X+P) on every call
@@ -15,7 +18,6 @@ THIS IS A VERSION OF X_P_sEt_Edgeswap which
 NEW IDEA: store lookup table for edges
 store vector just for computation of pivot - no need to re-save
 *store location of where you are in the process of shuffling
-*can calcu
 
 */
 
@@ -86,9 +88,23 @@ public:
     }
 
     //iteratate over neigbours and count intersection size and swap 
-    X_P_Set get_intersection(vector<int>& neighbours){ return get_intersection(neighbours.data(), neighbours.size()); }
+    X_P_Set get_intersection(int v){ 
+        vector<int>& ref = g.edges_list[v];
 
-    X_P_Set get_intersection(int* neighbours, int size){
+#ifndef SMART_INTERSECTION_CHOICE
+        return get_intersection_iter_list(ref.data(), ref.size()); 
+#else
+        if (ref.size()< X_size + P_size){
+            return get_intersection_iter_list(ref.data(), ref.size()); 
+        }
+        else{
+            return get_intersection_iter_PX(v);
+        }
+#endif
+    }
+
+    X_P_Set get_intersection_iter_list(int* neighbours, int size){
+        //TODO: optimisation - pass in edge name use lookup table for optimisations
         //change from default implementation: need to reorder adjacency list for each n
         int new_p_size = 0;
         int new_x_size = 0;
@@ -128,7 +144,47 @@ public:
 
         return X_P_Set(*this,new_x_size, new_p_size, org_undo_size);
     };
+
+    X_P_Set get_intersection_iter_PX(int v){
+        //TODO: optimisation - pass in edge name use lookup table for optimisations
+        //change from default implementation: need to reorder adjacency list for each n
+        int new_p_size = 0;
+        int new_x_size = 0;
+        int org_undo_size = undo_queue.size();
+
+        int elm;
+
+        //constructing intersection
+        for (int i = 0; i< P_size; i++){
+            elm = get_Pi(i);
+            if (elook.check_edge_exists(v,elm)){
+                do_swap(get_Pi(new_p_size++), elm);
+            }
+        }
+        for (int i = 0; i< X_size; i++){
+            elm = get_Xi(i);
+            if (elook.check_edge_exists(v,elm)){
+                do_swap(get_Xi(new_x_size++), elm);
+            }
+        }
+
+        //reordering adjacency list
+        for(int i = 0; i < new_p_size; i++){
+            elm = get_Pi(i);
+            update_adj_list(elm, new_p_size);
+
+        }
+        for(int i = 0; i< new_x_size; i++){
+            elm = get_Xi(i);
+            update_adj_list(elm, new_p_size);
+        }
+
+        return X_P_Set(*this,new_x_size, new_p_size, org_undo_size);
+    };
     
+
+
+
     void update_adj_list(int elm, int new_p_size){
         //printf("      update adj list for %d\n", elm);
         //printf("      before:"); print_vector(g.edges_list[elm]);
