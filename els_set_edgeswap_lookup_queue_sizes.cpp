@@ -12,14 +12,11 @@ using namespace std;
 
 #define ADJ_LOOKUP_MAP
 /*
-THIS IS A VERSION OF X_P_sEt_Edgeswap which 
-- reorders the edges in underlying graph (vertices in X+P) on every call
-- maintains lookup table of edges of size O(n^2) currently
+************NOT TESTED YET**************
 
+THIS IS A VERSION OF adjmap which 
+- stores a list of adj list sizes of elements in P each iteration
 
-NEW IDEA: store lookup table for edges
-store vector just for computation of pivot - no need to re-save
-*store location of where you are in the process of shuffling
 
 */
 
@@ -37,6 +34,7 @@ store vector just for computation of pivot - no need to re-save
 using namespace std;
 
 
+#define CACHE_ADJ_SIZE_X_P_Set
 
 
 
@@ -48,6 +46,7 @@ public:
     //vals contains all edges bounded by a range
     int n;
     vector<int>& lookup; //table index->loc of element (-1 if doesn't exist within table)
+    vector<vector<int>>& adj_sizes;
     vector<int>& vals;  // raw combined array of X,P sets
     vector<int>& undo_queue; //queue for undoing moves
     edge_lookup& elook;
@@ -60,8 +59,9 @@ public:
 
     //adds all elements to P by default
     X_P_Set(int n, Graph& g):
-    n(n), X_size(0), P_start(0), P_size(n), lookup(*new vector<int>(n, -1)), vals(*new vector<int>(n, -1)), undo_queue(*new vector<int>()), g(g), elook(*new edge_lookup(g)){
+    n(n), X_size(0), P_start(0), P_size(n), lookup(*new vector<int>(n, -1)), vals(*new vector<int>(n, -1)), undo_queue(*new vector<int>()), g(g), elook(*new edge_lookup(g)), adj_sizes(*new vector<vector<int>>(n,vector<int>())){
         for (int i = 0; i<n; i++){
+            adj_sizes[i].push_back(g.edges_list[i].size());
             lookup[i]=i;
             vals[i]=i;
         }
@@ -73,6 +73,7 @@ public:
         n(s.n), 
         lookup(s.lookup), 
         vals(s.vals), 
+        adj_sizes(s.adj_sizes),
         undo_queue(s.undo_queue),
         X_size(X_size), 
         P_start(s.P_start), 
@@ -80,7 +81,8 @@ public:
         queue_size(org_queue_size),
         g(s.g),
         elook(s.elook)
-    {};
+    {
+    };
 
     void operator=(X_P_Set sets){
         n = sets.n;
@@ -203,25 +205,26 @@ public:
                 break;
             }
         }
+        adj_sizes[elm].push_back(till);
         //printf("      after:"); print_vector(g.edges_list[elm]);
     }
 
     void update_adj_list_single_elm(int source, int elm, int side = 0){ //want to move elm to outer edges of source edgelist
         vector<int>& edge_list = g.edges_list[source];
-        int p_size = get_intersection_P_size(edge_list);
-        if (p_size> edge_list.size()|| p_size> P_size || p_size == 0){
-            printf("ERRORRRR relating to size %d %d %d\n", p_size, elook.check_edge_exists(source, elm), in_P(elm));
-            print_vector(edge_list);
-            for (int i = 0; i<P_size; i++){
-                printf("%d ",get_Pi(i));
-            } printf("\n");
-            print_everything();
-            assert(false);
-        }
+        int p_size = adj_sizes[source].back();
+
         bool res = elook.do_edge_swap(source, elm, edge_list[p_size-1]);
+        
+        adj_sizes[source].back()--;
+        //this only gets called on a move operation hence no need to create extra
+
         if (!res){
             printf("side: %d - elms: %d, %d- source of failure inside update adj list, res is: %d %d\n",side, source, elm, elook.check_edge_exists(source, elm),elook.check_edge_exists(elm,source));
         }
+    }
+
+    int get_P_size_adj_list(int elm){
+        return adj_sizes[elm].back();
     }
 
     int get_intersection_P_size(vector<int>& neighbours){return get_intersection_P_size(neighbours.data(), neighbours.size());}
@@ -387,6 +390,12 @@ public:
 
 
     void undo_changes(){
+        for (int i=0; i< P_size; i++){
+            adj_sizes[get_Pi(i)].pop_back();
+        }
+        for (int i=0; i< X_size; i++){
+            adj_sizes[get_Xi(i)].pop_back();
+        }
         while (undo_queue.size() > queue_size){
             //every elemen in undo queue was element added to X from P
             //can add to the front of X iteratively

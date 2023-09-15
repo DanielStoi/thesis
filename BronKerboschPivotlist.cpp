@@ -29,7 +29,11 @@ public:
         int pivot_size = -1;
         for (int i = 0; i<sets.P_size; i++){
             int v = sets.get_Pi(0);
+            #ifndef CACHE_ADJ_SIZE_X_P_Set
             int potential_size_cand = sets.get_intersection_P_size(g.edges_list[v]);
+            #else
+            int potential_size_cand = sets.adj_sizes[v];
+            #endif
             if (potential_size_cand>pivot_size){
                 pivot = v;
                 pivot_size = potential_size_cand;
@@ -37,7 +41,11 @@ public:
         }
         for (int i = 0; i<sets.X_size; i++){
             int v = sets.get_Xi(i);
+            #ifndef CACHE_ADJ_SIZE_X_P_Set
             int potential_size_cand = sets.get_intersection_P_size(g.edges_list[v]);
+            #else
+            int potential_size_cand = sets.adj_sizes[v];
+            #endif
             if (potential_size_cand>pivot_size){
                 pivot = v;
                 pivot_size = potential_size_cand;
@@ -53,8 +61,13 @@ public:
         //all elements will be in P by default
         X_P_Set XP(g.edges_list.size(), g);
 
-
+#ifndef ADJ_LOOKUP_MAP
         solve(included,XP);
+#else
+        solve_adjlookup(included, XP);
+        //this is optimisation for not creating seperate list for exclusion calc
+#endif
+
         return count;
     }
 
@@ -105,6 +118,49 @@ public:
                 X_P_Set new_XP = XP.get_intersection(v);
                 //solve recursively
                 solve(included, new_XP);
+            }
+
+            included.pop_back(); 
+            XP.add_exclusion(v);
+        }
+
+
+    }
+
+    void solve_adjlookup(vector<int>& included, X_P_Set& XP){
+
+        if (XP.P_size == 0 && XP.X_size == 0){
+            report(included);
+            return;
+        }
+
+        if (XP.P_size==0) return;
+
+
+        //CHOOSING PIVOT
+        int pivot;
+        if (use_max_pivot){
+            pivot = find_max_pivot(XP);
+        }
+        else{
+            pivot = XP.get_Pi(0);
+        }
+
+        //iterating over XP_search set
+        vector<int> search;
+        get_exclusion(search, g.edges_list[pivot], XP);
+        
+
+        while (XP.P_size>0){
+            int v = XP.get_Pi(0);
+            //calculating params for recursion
+            
+            included.push_back(v);
+
+            {
+                X_P_Set new_XP = XP.get_intersection(v);
+                //solve recursively
+                solve_adjlookup(included, new_XP);
             }
 
             included.pop_back(); 
