@@ -10,6 +10,8 @@ THIS IS A VERSION OF X_P_Set which reorders the edges in underlying graph on eve
 
 */
 
+#define EDGESWAP
+
 
 #include <cstdlib>
 #include <vector>

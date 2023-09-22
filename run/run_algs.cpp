@@ -8,7 +8,9 @@
 #include "../BronKerbosch.cpp"
 #include "../BronKerboschPivotlist.cpp"
 #include "../BronKerboschPivotlist_P_only.cpp"
-#include "../BronKerboschEquivReduction.cpp"
+#include "../BronKerboschEquivPlain.cpp"
+#include "../BronKerboschEquivDegen.cpp"
+#include "../BronKerboschEquivRecDegen.cpp"
 #include "../graph.h"
 #include "../correct_imp.cpp"
 
@@ -20,6 +22,10 @@ using namespace std;
 
 g++ run/run_algs.cpp -o run_algs
 ./run_algs datasets/brock200_2 normal
+
+RUNNING IN DEBUG MODE:
+g++ run/run_algs.cpp -o run_algs
+gdb ./run_algs datasets/brock200_2 normal
 
 */
 
@@ -65,6 +71,12 @@ int main(int argc, char** argv){
     }
     else if (strcmp(argv[2], "equiv") == 0){
         ans = BronKerboschEquivReduction(g).solve();
+    }
+    else if (strcmp(argv[2], "equivdegen") == 0){
+        ans = BronKerboschEquivReductionDegen(g).solve();
+    }
+    else if (strcmp(argv[2], "equivrecdegen") == 0){
+        ans = BronKerboschEquivReductionRecursiveDegen(g).solve();
     }
     else if (strcmp(argv[2], "correct") == 0){
         auto c = correctImp();

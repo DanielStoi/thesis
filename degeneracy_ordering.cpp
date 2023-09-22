@@ -7,7 +7,8 @@
 using namespace std;
 
 
-
+#ifndef LIN_HEAP
+#define LIN_HEAP
 //linear heap data structure
 class Lin_Heap: public ordering{
 public:
@@ -104,3 +105,6 @@ public:
         return elm;
     }
 };
+
+
+#endif

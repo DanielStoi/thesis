@@ -34,7 +34,7 @@ using namespace std;
 
 
 #define CACHE_ADJ_SIZE_X_P_Set
-
+#define EDGESWAP
 
 
 

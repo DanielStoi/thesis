@@ -4,21 +4,23 @@
 #include "should_print_clique.h"
 #include "docs/equiv_classes.h"
 
+//TESTED FOR CORRECTNESS
+
 class BronKerboschEquivReduction{
 public:
     Graph& g = *(new Graph);
     int count = 0;
     unsigned int multiplier = 1;
-    unordered_map<unsigned int, unsigned int> eq_size;
+    vector<int> eq_size;
 
-    BronKerboschEquivReduction(Graph& org){
+    BronKerboschEquivReduction(Graph& org): eq_size(org.size){
         compute_equivalence_classes(org, g, eq_size);
     }
 
     void report(vector<int>& included){
         count += multiplier;
         if (should_print_clique){
-            cout<<"found clique of size " << included.size() <<endl;
+            cout<<"found clique of size " << included.size() ;
             print_clique(included);
         }
     }
@@ -51,7 +53,6 @@ public:
             
             {
                 X_P_Set new_XP = XP.get_intersection(v);
-
                 included.push_back(v);
                 multiplier *= eq_size[v];
 

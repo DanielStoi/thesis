@@ -1,28 +1,46 @@
-#pragma once
-
 #include "graph.h"
 #include "els_set.h"
+//#include "els_set_undo.cpp"
 #include "should_print_clique.h"
+#include "docs/equiv_classes.h"
+#include "degeneracy_ordering.cpp"
 
 
-class BronKerboschPivot{
+
+//TESTED FOR CORRECTNESS
+
+#define USE_MAX_PIVOT_EQUIVREDDEGEN true;
+
+class BronKerboschEquivReductionDegen{
 public:
-    Graph& g;
+    Graph& g = *(new Graph);
     int count = 0;
-    bool use_max_pivot;
+    unsigned int multiplier = 1;
+    vector<int> eq_size;
+    bool use_max_pivot = USE_MAX_PIVOT_EQUIVREDDEGEN;
 
-    BronKerboschPivot(Graph& graph, bool use_max_pivot): g(graph){
-        this->use_max_pivot = use_max_pivot;
+    BronKerboschEquivReductionDegen(Graph& org): eq_size(vector<int>(org.size,0)){
+        compute_equivalence_classes(org, g, eq_size);
     }
+
+
+    
 
     void report(vector<int>& included){
-        count++;
+        count += multiplier;
         if (should_print_clique){
             cout<<"found clique of size " << included.size() <<endl;
-            print_vector(included);
+            print_clique(included);
         }
     }
+    
 
+    void get_exclusion(vector<int>& ans, vector<int>& neigbours, X_P_Set& XP){
+        auto tempXP = XP.get_exclusion(neigbours);
+        for (int i = 0; i < tempXP.P_size; i++){
+            ans.push_back(tempXP.get_Pi(i));
+        }
+    }
 
     int find_max_pivot(X_P_Set& sets){
         int pivot = -1;
@@ -57,22 +75,44 @@ public:
 
     int solve(){
         vector<int> included;
+        vector<int> ordering;
 
+
+        //preprocessing: getting degeneracy ordering list
+        int degen_ordering = Lin_Heap(&g).get_ordering(ordering);
+        printf("ordered %ld elements, degeneracy: %d\n", ordering.size(), degen_ordering);
         //all elements will be in P by default
         X_P_Set XP(g.edges_list.size(), g);
+        
+        for (auto v: ordering){
+            
+            //add v and solve using BronKerboschPivot
+            included.push_back(v);
+            multiplier *= eq_size[v];
+            {
+                X_P_Set new_XP = XP.get_intersection(v);
+                solve(included, new_XP);
+            }
 
-        solve(included,XP);
-
-        return count;
-    }
-
-    void get_exclusion(vector<int>& ans, vector<int>& neigbours, X_P_Set& XP){
-        auto tempXP = XP.get_exclusion(neigbours);
-        for (int i = 0; i < tempXP.P_size; i++){
-            ans.push_back(tempXP.get_Pi(i));
+            //add each elm to exclusion
+            included.pop_back(); 
+            multiplier /= eq_size[v];
+            XP.add_exclusion(v);
         }
+        return count;
+        // vector<int> included;
+
+        // //all elements will be in P by default
+        // X_P_Set XP(g.edges_list.size(), g);
+        // //X_P_Set XP(g.edges_list.size());
+
+
+        // solve(included, XP);
+        // return count;
     }
 
+    
+    
     void solve(vector<int>& included, X_P_Set& XP){
 
         if (XP.P_size == 0 && XP.X_size == 0){
@@ -108,63 +148,19 @@ public:
 
             //calculating params for recursion
             included.push_back(v);
-
+            multiplier *= eq_size[v];
             {
                 X_P_Set new_XP = XP.get_intersection(v);
                 //solve recursively
                 solve(included, new_XP);
             }
 
-            included.pop_back(); 
-            XP.add_exclusion(v);
-        }
-
-
-    }
-
-
-
-    /// FEATURE FOR NOT CREATING SEPERATE LIST FOR PIVOT CHOICE
-    //NOT YET IMPLEMENTED
-    void solve_adjlookup(vector<int>& included, X_P_Set& XP){
-
-        if (XP.P_size == 0 && XP.X_size == 0){
-            report(included);
-            return;
-        }
-
-        if (XP.P_size==0) return;
-
-
-        //CHOOSING PIVOT
-        int pivot;
-        if (use_max_pivot){
-            pivot = find_max_pivot(XP);
-        }
-        else{
-            pivot = XP.get_Pi(0);
-        }
-
-        //iterating over XP_search set
-        vector<int> search;
-        get_exclusion(search, g.edges_list[pivot], XP);
-        
-
-        while (XP.P_size>0){
-            int v = XP.get_Pi(0);
-            //calculating params for recursion
-            
-            included.push_back(v);
-
-            {
-                X_P_Set new_XP = XP.get_intersection(v);
-                //solve recursively
-                solve_adjlookup(included, new_XP);
-            }
+            multiplier /= eq_size[v];
 
             included.pop_back(); 
             XP.add_exclusion(v);
         }
+
 
 
     }

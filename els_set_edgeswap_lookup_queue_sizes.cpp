@@ -10,6 +10,7 @@ using namespace std;
 #define SMART_INTERSECTION_CHOICE
 
 
+#define EDGESWAP
 #define ADJ_LOOKUP_MAP
 /*
 ************NOT TESTED YET**************

@@ -18,6 +18,8 @@ this to be initialised with the val of the inserted thing
 
 */
 
+#define EDGESWAP
+
 
 #include <cstdlib>
 #include <vector>
