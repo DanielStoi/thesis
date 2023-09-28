@@ -55,21 +55,24 @@ namespace LJ_CommonFunctions {
 				++ set_size[vertex2set[v]];
 				if(-- set_size[old_setID] == 0) candidate_setIDs[-- candidate_setIDs_head] = old_setID;
 			}*/
-			for(unsigned int j = pstart[i];j < pend[i];j ++) {
-				unsigned int v = edges[j];
+			for(unsigned int j = pstart[i];j < pend[i];j ++) {  
+				unsigned int v = edges[j];          //iterating over edges v
 				unsigned int old_setID = vertex2set[v];
 
-				if(new_setID[old_setID] > n) {    //assigning a new_setID for edge
-					if(set_size[old_setID] == 1) continue;
+				if(new_setID[old_setID] > n) {    //assigning a new_setID for edge if doesn't exist
+					if(set_size[old_setID] == 1) continue; //doesn't move to another set
 
-					new_setID[old_setID] = candidate_setIDs[candidate_setIDs_head ++]; 
-					queue[queue_n ++] = old_setID;
+					new_setID[old_setID] = candidate_setIDs[candidate_setIDs_head ++]; //allocate  new set
+					queue[queue_n ++] = old_setID; //
 				}
 				vertex2set[v] = new_setID[old_setID];
 				++ set_size[vertex2set[v]];
-				if(-- set_size[old_setID] == 0) candidate_setIDs[-- candidate_setIDs_head] = old_setID;
+
+				if(-- set_size[old_setID] == 0)  candidate_setIDs[-- candidate_setIDs_head] = old_setID;
+				    //re-adds oldSetID back to the "pool" if emptied
 			}
-			while(queue_n > 0) new_setID[queue[-- queue_n]] = n+1;   //equivalent to removing elements from new_setId?
+			while(queue_n > 0) new_setID[queue[-- queue_n]] = n+1;   
+			//resetting new_setID for next round
 		}
 
 

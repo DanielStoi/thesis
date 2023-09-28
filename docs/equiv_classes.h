@@ -16,6 +16,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include "../graph.h"
+#include "../els_set.h"
 
 #ifndef NDEBUG
 #define NDEBUG
@@ -160,6 +161,15 @@ void compute_equivalence_classes(const Graph& g, Graph& eq_graph, vector<int>& e
 }
 
 
+inline int setelm_to_vertex(int x, X_P_Set& XP){ 
+    int XP_start = XP.P_start-XP.X_size;
+    return (XP.vals[ x +XP_start]);
+}
+inline int vertex_to_setelm(int x, X_P_Set& XP) {
+    int XP_start = XP.P_start-XP.X_size;
+    return (XP.lookup[ x ]-XP_start);
+}
+
 
 
 vector<pair<int,int>> compute_equivalence_classes_PX(const Graph& g, X_P_Set& XP, vector<int>& eq_sizes, char self_loop = 0) {
@@ -186,23 +196,37 @@ vector<pair<int,int>> compute_equivalence_classes_PX(const Graph& g, X_P_Set& XP
     }
     set_size[0] = n;
 
+
     unsigned int candidate_setIDs_head = 1;
 
-    int XP_start = XP.P_start-XP.X_size;
-    #define setelm_to_vertex(x) (XP.vals[x+XP_start]);
-    #define vertex_to_setelm(x) (XP.lookup[x]-XP_start);
+    //splitting P and X if X is non-empty
+    if (XP.X_size != 0){
+        candidate_setIDs_head = 2;
+        set_size[0]  = XP.X_size;
+        set_size[1]  = XP.P_size; 
+        for (int i = XP.X_size; i<XP.X_size+XP.P_size; i++){
+            vertex2set[i]=1;
+        }
+    }
 
     for(unsigned int i = 0;i < n;i ++) {
+        if (!(vertex_to_setelm(setelm_to_vertex(i,XP),XP) == i && setelm_to_vertex(i,XP) != -1)){
+            printf("unable to correctly set %d\n",i);
+            XP.print_everything();
+            int w = 123/0;
+        }
+
+
         unsigned int queue_n = 0;
-        int vi = setelm_to_vertex(i);
+        int vi = setelm_to_vertex(i, XP);
 
 
         //we need to iterate through entire of X,P 
         //an optimisation for edge lookup table is iterating through X,P instead of edges
-        for(int v: g.edges_list[i]) {
-            if (!XP.in_P(v) && !XP.in_X(v)) 
+        for(int edge: g.edges_list[vi]) {
+            if (!XP.in_P(edge) && !XP.in_X(edge)) 
                 continue;
-            v = vertex_to_setelm(v);
+            int v = vertex_to_setelm(edge, XP);
             unsigned int old_setID = vertex2set[v];
 
             if(new_setID[old_setID] > n) {    //assigning a new_setID for edge
@@ -241,6 +265,9 @@ vector<pair<int,int>> compute_equivalence_classes_PX(const Graph& g, X_P_Set& XP
 
     for(unsigned int i = eq_class_n;i > 0;i --) eq_class_starts[i] = eq_class_starts[i-1];
     eq_class_starts[0] = 0;
+    if (eq_class_starts[eq_class_n] !=n){
+        printf("wtf?\n");
+    }
 
     //storing equiv class changes in this for future reversability
     vector<pair<int,int>> changes;
@@ -253,7 +280,13 @@ vector<pair<int,int>> compute_equivalence_classes_PX(const Graph& g, X_P_Set& XP
         int cstart = eq_class_starts[i];
         int equiv_size = eq_class_starts[i+1]-cstart;
         if (equiv_size <= 1) continue;
-        int elm = setelm_to_vertex(eq_class_ids[cstart]);
+        int elm = setelm_to_vertex(eq_class_ids[cstart], XP);
+        if (XP.in_X(elm)) {
+            continue;
+        }
+        else if (!XP.in_P(elm)){
+            printf("weird behaviour detected\n");
+        }
         changes.push_back(make_pair(elm ,equiv_size));
         eq_sizes[elm] *= equiv_size;
         //printf("head_equiv: %d, size: %d\n", elm, equiv_size);
@@ -262,14 +295,13 @@ vector<pair<int,int>> compute_equivalence_classes_PX(const Graph& g, X_P_Set& XP
         for (int i = 1; i< equiv_size; i++){
             
             //remove other equiv edges from X,P
-            int elm = setelm_to_vertex(eq_class_ids[cstart+i]);
+            int elm = setelm_to_vertex(eq_class_ids[cstart+i], XP);
             //printf("removing element: %d\n", elm);
             if (XP.in_P(elm)){
                 XP.do_swap(XP.get_Pi(--new_p_size), elm);
             }
-            else if (XP.in_X(elm)){
-                XP.do_swap(XP.get_Xi(XP.X_size-1), elm);
-                XP.X_size--;
+            else{
+                printf("weird behaviour detected\n");
             }
 
         }
@@ -286,6 +318,8 @@ vector<pair<int,int>> compute_equivalence_classes_PX(const Graph& g, X_P_Set& XP
     }
 
 #endif
+
+    XP.P_size = new_p_size;
 
 
 

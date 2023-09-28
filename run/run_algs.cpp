@@ -24,9 +24,10 @@ g++ run/run_algs.cpp -o run_algs
 ./run_algs datasets/brock200_2 normal
 
 RUNNING IN DEBUG MODE:
-g++ run/run_algs.cpp -o run_algs
+g++ run/run_algs.cpp -o run_algs -g
 gdb ./run_algs datasets/brock200_2 normal
 
+bt    -- to see stacktrace
 */
 
 
