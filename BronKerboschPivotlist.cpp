@@ -5,6 +5,11 @@
 #include "should_print_clique.h"
 
 
+#ifdef DEBUG_EDGESWAP_CORRECTNESS
+#include "tests/correct_edgeswap_tester.cpp"
+#endif
+
+
 class BronKerboschPivot{
 public:
     Graph& g;
@@ -32,25 +37,29 @@ public:
             #ifndef CACHE_ADJ_SIZE_X_P_Set
             int potential_size_cand = sets.get_intersection_P_size(g.edges_list[v]);
             #else
-            int potential_size_cand = sets.adj_sizes[v].back();
+            int potential_size_cand = sets.get_intersection_P_size(v);
+            //int potential_size_cand = sets.adj_sizes[v].back();
             #endif
             if (potential_size_cand>pivot_size){
                 pivot = v;
                 pivot_size = potential_size_cand;
             }
         }
+        #ifndef USE_PIVOT_P_ONLY
         for (int i = 0; i<sets.X_size; i++){
             int v = sets.get_Xi(i);
             #ifndef CACHE_ADJ_SIZE_X_P_Set
             int potential_size_cand = sets.get_intersection_P_size(g.edges_list[v]);
             #else
-            int potential_size_cand = sets.adj_sizes[v].back();
+            int potential_size_cand = sets.get_intersection_P_size(v);
+            //int potential_size_cand = sets.adj_sizes[v].back();
             #endif
             if (potential_size_cand>pivot_size){
                 pivot = v;
                 pivot_size = potential_size_cand;
             }
         }
+        #endif
         //printf("found pivot as %d\n", pivot);
         return pivot;
     }

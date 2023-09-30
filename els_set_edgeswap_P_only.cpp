@@ -1,7 +1,6 @@
 
 /*
-THIS IS A VERSION OF X_P_Set which reorders the edges in underlying graph on every intersection or exclusion update
-
+THIS IS A VERSION OF X_P_edgeswap which only reshuffles edges in P instead of P,X
 */
 
 #define EDGESWAP
@@ -15,6 +14,9 @@ THIS IS A VERSION OF X_P_Set which reorders the edges in underlying graph on eve
 #pragma once
 
 using namespace std;
+
+#define USE_PIVOT_P_ONLY
+
 
 class X_P_Set{
 public:
@@ -70,6 +72,7 @@ public:
 
     X_P_Set get_intersection(int* neighbours, int size){
         //change from default implementation: need to reorder adjacency list for each n
+        //printf("getting intersection\n");
         int new_p_size = 0;
         int new_x_size = 0;
         int org_undo_size = undo_queue.size();
@@ -99,15 +102,11 @@ public:
             update_adj_list(elm, new_p_size);
 
         }
-        for(int i = 0; i< new_x_size; i++){
-            elm = get_Xi(i);
-            update_adj_list(elm, new_p_size);
-        }
 
         return X_P_Set(*this,new_x_size, new_p_size, org_undo_size);
     };
     
-    void update_adj_list(int elm, int new_p_size, int rem_elm = -1){
+    void update_adj_list(int elm, int new_p_size, int rem = -1){
         int till = 0;
         auto& edge_list = g.edges_list[elm];
         for (int j = 0; j < edge_list.size(); j++){
@@ -118,7 +117,7 @@ public:
                 till++;
             }
 
-            else if (!in_P(edge) && edge != rem_elm){
+            else if (!in_P(edge) && edge != rem){
                 break;
             }
         }
@@ -190,7 +189,7 @@ public:
 
     //precondition is that element is in P
     bool add_exclusion(int rem_elm){
-         if (!in_P(rem_elm)){
+        if (!in_P(rem_elm)){
             return false;
         }
         //printf("adding excl as %d\n", rem_elm);
@@ -289,6 +288,7 @@ public:
             int elm = undo_queue[undo_queue.size()-1];
             undo_queue.pop_back();
             do_swap(elm, get_Xi(0));
+            //printf("undoing excl of %d\n", elm);
             P_start-=1;
         }
     }

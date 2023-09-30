@@ -1,8 +1,8 @@
 #pragma once
 
-#include "graph.h"
+#include "../graph.h"
 #include "els_set_edgeswap_adj_map_P_only.cpp"
-#include "should_print_clique.h"
+#include "../should_print_clique.h"
 
 
 class BronKerboschPivot_P_only{

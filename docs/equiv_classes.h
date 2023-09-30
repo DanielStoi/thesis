@@ -292,10 +292,10 @@ vector<pair<int,int>> compute_equivalence_classes_PX(const Graph& g, X_P_Set& XP
         //printf("head_equiv: %d, size: %d\n", elm, equiv_size);
 
         
-        for (int i = 1; i< equiv_size; i++){
+        for (int j = 1; j< equiv_size; j++){
             
             //remove other equiv edges from X,P
-            int elm = setelm_to_vertex(eq_class_ids[cstart+i], XP);
+            int elm = setelm_to_vertex(eq_class_ids[cstart+j], XP);
             //printf("removing element: %d\n", elm);
             if (XP.in_P(elm)){
                 XP.do_swap(XP.get_Pi(--new_p_size), elm);

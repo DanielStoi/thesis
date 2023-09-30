@@ -50,7 +50,8 @@ public:
             #ifndef CACHE_ADJ_SIZE_X_P_Set
             int potential_size_cand = sets.get_intersection_P_size(g.edges_list[v]);
             #else
-            int potential_size_cand = sets.adj_sizes[v].back();
+            int potential_size_cand = sets.get_intersection_P_size(v);
+            //int potential_size_cand = sets.adj_sizes[v].back();
             #endif
             if (potential_size_cand>pivot_size){
                 pivot = v;
@@ -62,7 +63,8 @@ public:
             #ifndef CACHE_ADJ_SIZE_X_P_Set
             int potential_size_cand = sets.get_intersection_P_size(g.edges_list[v]);
             #else
-            int potential_size_cand = sets.adj_sizes[v].back();
+            //int potential_size_cand = sets.adj_sizes[v].back();
+            int potential_size_cand = sets.get_intersection_P_size(v);
             #endif
             if (potential_size_cand>pivot_size){
                 pivot = v;

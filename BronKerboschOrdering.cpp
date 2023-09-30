@@ -2,7 +2,7 @@
 #include "els_set.h"
 #include "degeneracy_ordering.cpp"
 #include "should_print_clique.h"
-#include "BronKerboschPivotList.cpp"
+#include "BronKerboschPivotlist.cpp"
 
 class BronKerboschDegen: public BronKerboschPivot{
     using BronKerboschPivot::BronKerboschPivot;

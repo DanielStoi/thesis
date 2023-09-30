@@ -48,6 +48,23 @@ void test_basic2(){
     
 }
 
+void test_basic3(){
+    Graph g = create_graph_eg2();
+    printf("---\n");
+    g.print_graph();
+
+    BronKerbosch sol(g);
+    cout<<"init done\n\n\n";
+    int ans = sol.solve();
+    cout<<"amount of solutions: "<<ans<<endl;
+    g.verify_self();
+    get_correct(g);
+
+
+    
+}
+
+
 
 
 
@@ -55,5 +72,6 @@ void test_basic2(){
 int main(){
     test_basic();
     test_basic2();
+    test_basic3();
     return 0;
 }

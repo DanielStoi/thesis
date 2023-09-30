@@ -3,6 +3,10 @@
 //#include "els_set_undo.cpp"
 #include "should_print_clique.h"
 
+#ifdef DEBUG_EDGESWAP_CORRECTNESS
+#include "tests/correct_edgeswap_tester.cpp"
+#endif
+
 class BronKerbosch{
 public:
     Graph& g = *(new Graph);
@@ -39,6 +43,10 @@ public:
 
         if (XP.P_size==0) return;
 
+        #ifdef DEBUG_EDGESWAP_CORRECTNESS
+        check_edgeswap_conditon(g, XP);
+        #endif
+
         //iterating through all the elements and updating
         while (XP.P_size>0){
             int v = XP.get_Pi(0);
@@ -46,6 +54,11 @@ public:
             
             {
                 X_P_Set new_XP = XP.get_intersection(v);
+
+                #ifdef DEBUG_EDGESWAP_CORRECTNESS
+                check_intersection_correctness(g,XP, new_XP, v);
+                #endif
+
                 included.push_back(v);
 
                 //solve recursively
