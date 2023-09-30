@@ -367,6 +367,10 @@ public:
     void do_swap(int elm_a, int elm_b){
         int loc_a = lookup[elm_a];
         int loc_b = lookup[elm_b];
+
+        //swapping edge sizes
+        swap(edge_sizes[loc_a-P_start+X_size], edge_sizes[loc_a-P_start+X_size]);
+        
         //swapping val entries
         vals[loc_a] = elm_b;
         vals[loc_b] = elm_a;

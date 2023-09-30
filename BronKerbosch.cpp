@@ -3,6 +3,9 @@
 //#include "els_set_undo.cpp"
 #include "should_print_clique.h"
 
+
+//#define DEBUG_EDGESWAP_CORRECTNESS
+
 #ifdef DEBUG_EDGESWAP_CORRECTNESS
 #include "tests/correct_edgeswap_tester.cpp"
 #endif
@@ -44,13 +47,15 @@ public:
         if (XP.P_size==0) return;
 
         #ifdef DEBUG_EDGESWAP_CORRECTNESS
-        check_edgeswap_conditon(g, XP);
+        //check_edgeswap_conditon(g, XP);
         #endif
-
+        
         //iterating through all the elements and updating
         while (XP.P_size>0){
             int v = XP.get_Pi(0);
             //calculating params for recursion
+            
+            
             
             {
                 X_P_Set new_XP = XP.get_intersection(v);

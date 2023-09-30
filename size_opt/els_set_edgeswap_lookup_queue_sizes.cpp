@@ -1,17 +1,10 @@
-#include <cstdlib>
-#include <vector>
-#include <iostream>
-#include "graph.h"
-#include <cassert>
 
-using namespace std;
-
-
-#define SMART_INTERSECTION_CHOICE
 
 
 #define EDGESWAP
 #define ADJ_LOOKUP_MAP
+
+#define SMART_INTERSECTION_CHOICE
 /*
 ************NOT TESTED YET**************
 
@@ -36,7 +29,6 @@ using namespace std;
 
 
 #define CACHE_ADJ_SIZE_X_P_Set
-
 
 
 
@@ -301,14 +293,12 @@ public:
             neig = get_Pi(i);
             if (!elook.check_edge_exists(neig, elm)) continue;
             update_adj_list_single_elm(neig, elm);
-            //}
         }
 
         for(int i = 0; i< X_size; i++){
             neig = get_Xi(i);
             if (!elook.check_edge_exists(neig, elm)) continue;
             update_adj_list_single_elm(neig, elm);
-            //}
         }
 
         P_start++;

@@ -3,7 +3,7 @@
 #include <vector>
 #include <algorithm>
 
-#include "../BronKerboschPivotlist_P_only.cpp"
+#include "../BronKerboschPivotlist.cpp"
 #include "../graph.h"
 #include "eg_graphs.cpp"
 #include "correct_tester.cpp"

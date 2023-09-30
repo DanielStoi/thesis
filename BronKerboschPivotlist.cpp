@@ -33,7 +33,7 @@ public:
         int pivot = -1;
         int pivot_size = -1;
         for (int i = 0; i<sets.P_size; i++){
-            int v = sets.get_Pi(0);
+            int v = sets.get_Pi(i);
             #ifndef CACHE_ADJ_SIZE_X_P_Set
             int potential_size_cand = sets.get_intersection_P_size(g.edges_list[v]);
             #else
@@ -105,13 +105,15 @@ public:
         vector<int> search;
         get_exclusion(search, g.edges_list[pivot], XP);
         
-        //cout<<"--------------"<<pivot<<"\n";
-        //cout<<"included:";
-        //print_vector(included);
-        //cout<<"--\nXP:\n";
-        //XP.print_everything(included.size());
-        //cout<<"XP_search:\n";
-        //XP.get_exclusion(g.edges_list[pivot]).print_everything();
+        // cout<<"--------------"<<pivot<<"\n";
+        // cout<<"included:";
+        // print_vector(included);
+        // cout<<"--\nXP:\n";
+        // XP.print_everything(included.size());
+        // cout<<"XP_search:\n";
+        // XP.get_exclusion(g.edges_list[pivot]).print_everything();
+        // cout<<"the edgelist:\n";
+        // print_vector(g.edges_list[pivot]);
 
         for (auto v: search){
 
