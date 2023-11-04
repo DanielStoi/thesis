@@ -22,6 +22,7 @@ public:
 
     void report(vector<int>& included){
         count++;
+
         if (should_print_clique){
             cout<<"found clique of size " << included.size() <<endl;
             print_vector(included);
@@ -30,11 +31,14 @@ public:
 
 
     int find_max_pivot(X_P_Set& sets){
+        #ifdef DONEPIVOTCALC
+        if (sets.max_pivot != -1) return sets.max_pivot;
+        #endif
         int pivot = -1;
         int pivot_size = -1;
         for (int i = 0; i<sets.P_size; i++){
             int v = sets.get_Pi(i);
-            #ifndef CACHE_ADJ_SIZE_X_P_Set
+            #ifndef INPUT_V_SET
             int potential_size_cand = sets.get_intersection_P_size(g.edges_list[v]);
             #else
             int potential_size_cand = sets.get_intersection_P_size(v);
@@ -48,7 +52,7 @@ public:
         #ifndef USE_PIVOT_P_ONLY
         for (int i = 0; i<sets.X_size; i++){
             int v = sets.get_Xi(i);
-            #ifndef CACHE_ADJ_SIZE_X_P_Set
+            #ifndef INPUT_V_SET
             int potential_size_cand = sets.get_intersection_P_size(g.edges_list[v]);
             #else
             int potential_size_cand = sets.get_intersection_P_size(v);
@@ -75,8 +79,14 @@ public:
         return count;
     }
 
-    void get_exclusion(vector<int>& ans, vector<int>& neigbours, X_P_Set& XP){
+    void get_set_exclusion(vector<int>& ans, int pivot, X_P_Set& XP){
+        vector<int>& neigbours = g.edges_list[pivot];
+        #ifndef INPUT_V_SET
         auto tempXP = XP.get_exclusion(neigbours);
+        #else
+        auto tempXP = XP.get_exclusion(pivot);
+        #endif
+
         for (int i = 0; i < tempXP.P_size; i++){
             ans.push_back(tempXP.get_Pi(i));
         }
@@ -85,6 +95,9 @@ public:
     void solve(vector<int>& included, X_P_Set& XP){
 
         if (XP.P_size == 0 && XP.X_size == 0){
+            #ifdef NO_X_MAINTAINANCE
+            if (!XP.checker.check_maximal(included)) return;
+            #endif
             report(included);
             return;
         }
@@ -103,7 +116,7 @@ public:
 
         //iterating over XP_search set
         vector<int> search;
-        get_exclusion(search, g.edges_list[pivot], XP);
+        get_set_exclusion(search, pivot, XP);
         
         // cout<<"--------------"<<pivot<<"\n";
         // cout<<"included:";
@@ -133,50 +146,4 @@ public:
 
     }
 
-
-
-    /// FEATURE FOR NOT CREATING SEPERATE LIST FOR PIVOT CHOICE
-    //NOT YET IMPLEMENTED
-    void solve_adjlookup(vector<int>& included, X_P_Set& XP){
-
-        if (XP.P_size == 0 && XP.X_size == 0){
-            report(included);
-            return;
-        }
-
-        if (XP.P_size==0) return;
-
-
-        //CHOOSING PIVOT
-        int pivot;
-        if (use_max_pivot){
-            pivot = find_max_pivot(XP);
-        }
-        else{
-            pivot = XP.get_Pi(0);
-        }
-
-        //iterating over XP_search set
-        vector<int> search;
-        get_exclusion(search, g.edges_list[pivot], XP);
-        
-
-        while (XP.P_size>0){
-            int v = XP.get_Pi(0);
-            //calculating params for recursion
-            
-            included.push_back(v);
-
-            {
-                X_P_Set new_XP = XP.get_intersection(v);
-                //solve recursively
-                solve_adjlookup(included, new_XP);
-            }
-
-            included.pop_back(); 
-            XP.add_exclusion(v);
-        }
-
-
-    }
 };

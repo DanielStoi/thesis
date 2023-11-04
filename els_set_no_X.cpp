@@ -1,10 +1,13 @@
+#include "maximal_clique_checker.cpp"
 
 /*
-THIS IS A VERSION OF X_P_edgeswap which only reshuffles edges in P instead of P,X
-and additionally defines macros for pivot choice to search through P
+Implementation that treats X as if it was empty all the time then checks if a given clique is maximal
+
+
+
 */
 
-#define EDGESWAP
+
 
 
 #include <cstdlib>
@@ -16,6 +19,8 @@ and additionally defines macros for pivot choice to search through P
 
 using namespace std;
 
+
+#define NO_X_MAINTAINANCE
 #define USE_PIVOT_P_ONLY
 
 
@@ -27,17 +32,16 @@ public:
     int n;
     vector<int>& lookup; //table index->loc of element (-1 if doesn't exist within table)
     vector<int>& vals;  // raw combined array of X,P sets
-    vector<int>& undo_queue; //queue for undoing moves
     Graph& g;
-    int X_size;
+    int X_size = 0;
     int P_start;
-    int P_size;
-    int queue_size = 0;
+    int P_size = 0;
+    maximal_clique_checker& checker;
 
 
     //adds all elements to P by default
     X_P_Set(int n, Graph& g):
-    n(n), X_size(0), P_start(0), P_size(n), lookup(*new vector<int>(n, -1)), vals(*new vector<int>(n, -1)), undo_queue(*new vector<int>()), g(g){
+    n(n), P_start(0), P_size(n), lookup(*new vector<int>(n, -1)), vals(*new vector<int>(n, -1)), g(g), checker(*new maximal_clique_checker(g)){
         for (int i = 0; i<n; i++){
             lookup[i]=i;
             vals[i]=i;
@@ -46,24 +50,27 @@ public:
 
 
     //constructor will just use same lookup and val table but change refs to pointers
-    X_P_Set(X_P_Set& s, int X_size, int P_size, int org_queue_size) : 
+    X_P_Set(X_P_Set& s,int P_size) : 
         n(s.n), 
         lookup(s.lookup), 
         vals(s.vals), 
-        undo_queue(s.undo_queue),
-        X_size(X_size), 
         P_start(s.P_start), 
         P_size(P_size),
-        queue_size(org_queue_size),
-        g(s.g)
-    {};
+        g(s.g),
+        checker(s.checker)
+    { 
+    };
+
+
 
     void operator=(X_P_Set sets){
         n = sets.n;
-        X_size = sets.X_size;
         P_start = sets.P_start;
         P_size = sets.P_size;
     }
+
+
+
 
     //iteratate over neigbours and count intersection size and swap 
     X_P_Set get_intersection(int v){ 
@@ -72,16 +79,9 @@ public:
     }
 
     X_P_Set get_intersection(int* neighbours, int size){
-        //change from default implementation: need to reorder adjacency list for each n
-        //printf("getting intersection\n");
         int new_p_size = 0;
-        int new_x_size = 0;
-        int org_undo_size = undo_queue.size();
 
         int elm;
-
-
-        //constructing intersection
         for (int i = 0; i < size; i++){
             
             
@@ -91,44 +91,14 @@ public:
                 do_swap(get_Pi(new_p_size), elm);
                 new_p_size++;
             }
-            else if (in_X(elm)){
-                do_swap(get_Xi(new_x_size), elm);
-                new_x_size++;
-            }
         }
-
-        //reordering adjacency list
-        for(int i = 0; i < new_p_size; i++){
-            elm = get_Pi(i);
-            update_adj_list(elm, new_p_size);
-
-        }
-
-        return X_P_Set(*this,new_x_size, new_p_size, org_undo_size);
+        return X_P_Set(*this, new_p_size);
     };
     
-    void update_adj_list(int elm, int new_p_size, int rem = -1){
-        int till = 0;
-        auto& edge_list = g.edges_list[elm];
-        for (int j = 0; j < edge_list.size(); j++){
-            int edge = edge_list[j];
-            int loc = lookup[edge];
-            if (loc >= P_start && loc < P_start+new_p_size){//apply swap
-                swap(edge_list[till], edge_list[j]);
-                till++;
-            }
-
-            else if (!in_P(edge) && edge != rem){
-                break;
-            }
-        }
-    }
 
     int get_intersection_P_size(vector<int>& neighbours){return get_intersection_P_size(neighbours.data(), neighbours.size());}
 
     int get_intersection_P_size(int* neighbours, int size){
-
-#ifndef ELS_SET_BIN_SEARCH
         int new_p_size = 0;
         int elm;
         for (int i = 0; i < size; i++){
@@ -136,35 +106,8 @@ public:
             if (in_P(elm)){
                 new_p_size++;
             }
-            else break;
         }
         return new_p_size;
-#else
-    printf("bla\n");
-    if (upper_bound < 10){
-            for (int i = 0; i < size; i++){
-                elm = neighbours[i];
-                if (in_P(elm)){
-                    ans++;
-                }
-                else break;
-            }
-            return ans;
-        }
-
-        while (upper_bound>=lower_bound){
-            mid = (lower_bound+upper_bound)>>1;
-            elm = neighbours[mid];
-            if (in_P(elm)){
-                lower_bound = mid+1;
-                ans = lower_bound;
-            }
-            else{
-                upper_bound = mid-1;
-            }
-        }
-#endif
-
     };
 
 
@@ -175,7 +118,6 @@ public:
 
     X_P_Set get_exclusion(int* neighbours, int size){
         int new_p_size = P_size;
-        int org_undo_size = undo_queue.size();
         for (int i = 0; i < size; i++){
             int elm = neighbours[i];
 
@@ -183,30 +125,15 @@ public:
                 do_swap(get_Pi(new_p_size-1), elm);
                 new_p_size--;
             }
-            else break;
         }
-        return X_P_Set(*this, X_size, new_p_size, org_undo_size);
+        return X_P_Set(*this, new_p_size);
     };
 
     //precondition is that element is in P
-    bool add_exclusion(int rem_elm){
-        if (!in_P(rem_elm)){
-            return false;
-        }
-        //printf("adding excl as %d\n", rem_elm);
-        undo_queue.push_back(rem_elm);
-        do_swap(rem_elm, get_Pi(0)); //only here should elements be added to the queue
-        
-        //
-
-        P_start++;
-        X_size++;
+    bool add_exclusion(int elm){
+        if (!in_P(elm)) return false;
+        do_swap(elm, get_Pi(P_size-1)); //only here should elements be added to the queue
         P_size--;
-        //idea: could optimise this process by also maintain a set of adj edges
-        for(int i = 0; i < P_size; i++){
-            int elm = get_Pi(i);
-            update_adj_list(elm, P_size, rem_elm);
-        }
         return true;
     };
 
@@ -259,7 +186,6 @@ public:
         cout<<"P_start:"<<P_start;
         cout<<"  P_size:"<<P_size;
         cout<<"  X_size:"<<X_size;
-        cout<<"  undo_size:"<<undo_queue.size()/2;
         cout<<endl;
         for (int d = 0; d<depth; d++) printf("  ");
         cout<<"vals: ";
@@ -276,23 +202,11 @@ public:
 
 
     ~X_P_Set(){
-        //printf("undoing %ld to %d\n", undo_queue.size()/2, queue_size/2);
-        undo_changes();
         
     }
 
 
-    void undo_changes(){
-        while (undo_queue.size() > queue_size){
-            //every elemen in undo queue was element added to X from P
-            //can add to the front of X iteratively
-            int elm = undo_queue[undo_queue.size()-1];
-            undo_queue.pop_back();
-            do_swap(elm, get_Xi(0));
-            //printf("undoing excl of %d\n", elm);
-            P_start-=1;
-        }
-    }
+
 
 
 

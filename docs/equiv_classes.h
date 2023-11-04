@@ -213,7 +213,8 @@ vector<pair<int,int>> compute_equivalence_classes_PX(const Graph& g, X_P_Set& XP
         if (!(vertex_to_setelm(setelm_to_vertex(i,XP),XP) == i && setelm_to_vertex(i,XP) != -1)){
             printf("unable to correctly set %d\n",i);
             XP.print_everything();
-            int w = 123/0;
+            assert(false);
+            //int w = 123/0;
         }
 
 

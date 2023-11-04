@@ -1,16 +1,22 @@
+#include <cstdlib>
+#include <vector>
+#include <iostream>
+#include "graph.h"
+#include "maximal_clique_checker.cpp"
+#include <cassert>
+
+using namespace std;
 
 
-
-#define EDGESWAP
-#define ADJ_LOOKUP_MAP
+#define INPUT_V_SET
+#define NO_X_MAINTAINANCE
 
 #define SMART_INTERSECTION_CHOICE
+
+
+#define ADJ_LOOKUP_MAP
 /*
-************NOT TESTED YET**************
-
-THIS IS A VERSION OF adjmap which 
-- stores a list of adj list sizes of elements in P each iteration
-
+based off els_set_lookup_map except doesn't maintain X and instead does a check at the end
 
 */
 
@@ -28,7 +34,7 @@ THIS IS A VERSION OF adjmap which
 using namespace std;
 
 
-#define CACHE_ADJ_SIZE_X_P_Set
+
 
 
 
@@ -39,9 +45,9 @@ public:
     //vals contains all edges bounded by a range
     int n;
     vector<int>& lookup; //table index->loc of element (-1 if doesn't exist within table)
-    vector<vector<int>>& adj_sizes;
     vector<int>& vals;  // raw combined array of X,P sets
     vector<int>& undo_queue; //queue for undoing moves
+    maximal_clique_checker& checker;
     edge_lookup& elook;
     Graph& g;
     int X_size;
@@ -52,9 +58,9 @@ public:
 
     //adds all elements to P by default
     X_P_Set(int n, Graph& g):
-    n(n), X_size(0), P_start(0), P_size(n), lookup(*new vector<int>(n, -1)), vals(*new vector<int>(n, -1)), undo_queue(*new vector<int>()), g(g), elook(*new edge_lookup(g)), adj_sizes(*new vector<vector<int>>(n,vector<int>())){
+    n(n), X_size(0), P_start(0), P_size(n), lookup(*new vector<int>(n, -1)), vals(*new vector<int>(n, -1)), undo_queue(*new vector<int>()), g(g), 
+    elook(*new edge_lookup(g)), checker(*new maximal_clique_checker(g)){
         for (int i = 0; i<n; i++){
-            adj_sizes[i].push_back(g.edges_list[i].size());
             lookup[i]=i;
             vals[i]=i;
         }
@@ -66,16 +72,15 @@ public:
         n(s.n), 
         lookup(s.lookup), 
         vals(s.vals), 
-        adj_sizes(s.adj_sizes),
         undo_queue(s.undo_queue),
         X_size(X_size), 
         P_start(s.P_start), 
         P_size(P_size),
         queue_size(org_queue_size),
         g(s.g),
-        elook(s.elook)
-    {
-    };
+        elook(s.elook),
+        checker(s.checker)
+    {};
 
     void operator=(X_P_Set sets){
         n = sets.n;
@@ -91,7 +96,7 @@ public:
 #ifndef SMART_INTERSECTION_CHOICE
         return get_intersection_iter_list(ref.data(), ref.size()); 
 #else
-        if (ref.size()< X_size + P_size){
+        if (ref.size()< P_size){
             return get_intersection_iter_list(ref.data(), ref.size()); 
         }
         else{
@@ -126,18 +131,7 @@ public:
             }
         }
 
-        //CIR_OPT
 
-        //reordering adjacency list
-        for(int i = 0; i < new_p_size; i++){
-            elm = get_Pi(i);
-            update_adj_list(elm, new_p_size);
-
-        }
-        for(int i = 0; i< new_x_size; i++){
-            elm = get_Xi(i);
-            update_adj_list(elm, new_p_size);
-        }
 
         return X_P_Set(*this,new_x_size, new_p_size, org_undo_size);
     };
@@ -165,16 +159,6 @@ public:
             }
         }
 
-        //reordering adjacency list
-        for(int i = 0; i < new_p_size; i++){
-            elm = get_Pi(i);
-            update_adj_list(elm, new_p_size);
-
-        }
-        for(int i = 0; i< new_x_size; i++){
-            elm = get_Xi(i);
-            update_adj_list(elm, new_p_size);
-        }
 
         return X_P_Set(*this,new_x_size, new_p_size, org_undo_size);
     };
@@ -182,97 +166,49 @@ public:
 
 
 
-    void update_adj_list(int elm, int new_p_size){
-        //printf("      update adj list for %d\n", elm);
-        //printf("      before:"); print_vector(g.edges_list[elm]);
-        int till = 0;
-        auto& edge_list = g.edges_list[elm];
-        for (int j = 0; j < edge_list.size(); j++){
-            int e = edge_list[j];
-            int loc = lookup[e];
-            if (loc >= P_start && loc < P_start+new_p_size){//apply swap for smaller val
-                elook.do_edge_swap(elm, edge_list[till], e);
-                till++;
-            }
-            else if (!in_P(e)){
-                break;
-            }
-        }
-        adj_sizes[elm].push_back(till);
-        //printf("      after:"); print_vector(g.edges_list[elm]);
-    }
-
-    void update_adj_list_single_elm(int source, int elm, int side = 0){ //want to move elm to outer edges of source edgelist
-        vector<int>& edge_list = g.edges_list[source];
-        int p_size = adj_sizes[source].back();
-
-        bool res = elook.do_edge_swap(source, elm, edge_list[p_size-1]);
-        
-        adj_sizes[source].back()--;
-        //this only gets called on a move operation hence no need to create extra
-
-        if (!res){
-            printf("side: %d - elms: %d, %d- source of failure inside update adj list, res is: %d %d\n",side, source, elm, elook.check_edge_exists(source, elm),elook.check_edge_exists(elm,source));
-        }
-    }
-
-    int get_P_size_adj_list(int elm){
-        return adj_sizes[elm].back();
-    }
-
-    int get_intersection_P_size(vector<int>& neighbours){return get_intersection_P_size(neighbours.data(), neighbours.size());}
-
-    int get_intersection_P_size(int* neighbours, int size){
-        int lower_bound = 0;
-        int upper_bound = min(P_size, size)-1;
+    int get_intersection_P_size(int v){
+        vector<int>& neigbours = g.edges_list[v];
         int ans = 0;
-        int mid;
-        int elm;
-        
-        if (size < 10 ){
-            for (int i = 0; i < size; i++){
-                elm = neighbours[i];
-                if (in_P(elm)){
-                    ans++;
-                }
-                else break;
+        if (neigbours.size() < P_size){
+            for (int elm: neigbours){
+                if (in_P(elm)) ans++;
             }
             return ans;
         }
-
-        while (upper_bound>=lower_bound){
-            mid = (lower_bound+upper_bound)>>1;
-            elm = neighbours[mid];
-            if (in_P(elm)){
-                lower_bound = mid+1;
-                ans = lower_bound;
-            }
-            else{
-                upper_bound = mid-1;
-            }
+        
+        for (int i = 0; i< P_size; i++){
+            int elm = get_Pi(i);
+            if (elook.check_edge_exists(elm,v)) ans++;
         }
-
         return ans;
     };
 
 
     //will add all intersecting neigbours as exclusions
-    X_P_Set get_exclusion(vector<int>& neighbours){
-        return get_exclusion(neighbours.data(), neighbours.size());
-    }
 
-    X_P_Set get_exclusion(int* neighbours, int size){
+    X_P_Set get_exclusion(int v){
         int new_p_size = P_size;
         int new_x_size = X_size;
+        vector<int>& neighbours = g.edges_list[v];
         int org_undo_size = undo_queue.size();
-        for (int i = 0; i < size; i++){
-            int elm = neighbours[i];
 
-            if (in_P(elm)){
-                do_swap(get_Pi(new_p_size-1), elm);
-                new_p_size--;
+        if (P_size > neighbours.size()){
+            for (int elm: neighbours){
+                if (in_P(elm)){
+                    do_swap(get_Pi(new_p_size-1), elm);
+                    new_p_size--;
+                }
             }
-            else break;
+        }
+        else{
+            for (int i = P_size-1; i>=0; i--){
+                int elm = get_Pi(i);
+                if (elook.check_edge_exists(elm,v)){
+                    do_swap(get_Pi(new_p_size-1), elm);
+                    new_p_size--;
+                }
+            }
+
         }
         return X_P_Set(*this, new_x_size, new_p_size, org_undo_size);
     };
@@ -286,20 +222,6 @@ public:
         undo_queue.push_back(elm);
         do_swap(elm, get_Pi(0)); //only here should elements be added to the queue
         
-
-        int neig;
-        //idea: could optimise this process by also maintain a set of adj edges
-        for(int i = 1; i < P_size; i++){
-            neig = get_Pi(i);
-            if (!elook.check_edge_exists(neig, elm)) continue;
-            update_adj_list_single_elm(neig, elm);
-        }
-
-        for(int i = 0; i< X_size; i++){
-            neig = get_Xi(i);
-            if (!elook.check_edge_exists(neig, elm)) continue;
-            update_adj_list_single_elm(neig, elm);
-        }
 
         P_start++;
         X_size++;
@@ -381,12 +303,6 @@ public:
 
 
     void undo_changes(){
-        for (int i=0; i< P_size; i++){
-            adj_sizes[get_Pi(i)].pop_back();
-        }
-        for (int i=0; i< X_size; i++){
-            adj_sizes[get_Xi(i)].pop_back();
-        }
         while (undo_queue.size() > queue_size){
             //every elemen in undo queue was element added to X from P
             //can add to the front of X iteratively

@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <chrono>
+
 
 #include "../BronKerboschOrdering.cpp"
 #include "../BronKerbosch.cpp"
@@ -48,6 +50,8 @@ int main(int argc, char** argv){
     bool is_valid = g.verify_self();
     if (!is_valid) return 0;
 
+    clock_t t = clock();
+
     int ans = 0;
     if (strcmp(argv[2], "normal") == 0){
         ans = BronKerbosch(g).solve();
@@ -70,15 +74,15 @@ int main(int argc, char** argv){
     else if (strcmp(argv[2], "degenopt") == 0){
         ans = BronKerboschDegen(g, true).solve();
     }
-    else if (strcmp(argv[2], "equiv") == 0){
-        //ans = BronKerboschEquivReduction(g).solve();
-    }
-    else if (strcmp(argv[2], "equivdegen") == 0){
-       // ans = BronKerboschEquivReductionDegen(g).solve();
-    }
-    else if (strcmp(argv[2], "equivrecdegen") == 0){
-        //ans = BronKerboschEquivReductionRecursiveDegen(g).solve();
-    }
+    // else if (strcmp(argv[2], "equiv") == 0){
+    //     ans = BronKerboschEquivReduction(g).solve();
+    // }
+    // else if (strcmp(argv[2], "equivdegen") == 0){
+    //    ans = BronKerboschEquivReductionDegen(g).solve();
+    // }
+    // else if (strcmp(argv[2], "equivrecdegen") == 0){
+    //     ans = BronKerboschEquivReductionRecursiveDegen(g).solve();
+    // }
     else if (strcmp(argv[2], "correct") == 0){
         auto c = correctImp();
         c.loadgraph(g);
@@ -90,5 +94,6 @@ int main(int argc, char** argv){
     }
 
     printf("found %d cliques\n", ans);
+    cout<<"time taken: "<< (double)(clock() - t)/CLOCKS_PER_SEC << endl;
     return 0;
 }

@@ -1,7 +1,13 @@
 
 #pragma once
 
-#include "els_set_edgeswap_lookup_map.cpp"
+//#include "els_set_edgeswap_lookup_map.cpp"
+
+//#include "els_set_lookup_map.cpp"
+
+#include "els_set_lookup_map_no_X.cpp"
+
+//#include "els_set_no_X.cpp"
 
 //#include "els_set_undo.cpp"
 

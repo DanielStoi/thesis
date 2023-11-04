@@ -5,7 +5,7 @@ THIS IS A VERSION OF X_P_Set which reorders the edges in underlying graph on eve
 */
 
 #define EDGESWAP
-
+#define DONEPIVOTCALC
 
 #include <cstdlib>
 #include <vector>
@@ -23,6 +23,7 @@ public:
     //vals contains all edges bounded by a range
     int n;
     vector<int>& lookup; //table index->loc of element (-1 if doesn't exist within table)
+    int max_pivot = -1;
     vector<int>& vals;  // raw combined array of X,P sets
     vector<int>& undo_queue; //queue for undoing moves
     Graph& g;
@@ -43,7 +44,7 @@ public:
 
 
     //constructor will just use same lookup and val table but change refs to pointers
-    X_P_Set(X_P_Set& s, int X_size, int P_size, int org_queue_size) : 
+    X_P_Set(X_P_Set& s, int X_size, int P_size, int org_queue_size, int max_pivot=-1) : 
         n(s.n), 
         lookup(s.lookup), 
         vals(s.vals), 
@@ -52,7 +53,8 @@ public:
         P_start(s.P_start), 
         P_size(P_size),
         queue_size(org_queue_size),
-        g(s.g)
+        g(s.g),
+        max_pivot(max_pivot)
     {};
 
     void operator=(X_P_Set sets){
@@ -93,21 +95,32 @@ public:
             }
         }
 
+        int child_max_pivot = -1;
+        int pivot_size = 0;
+
         //reordering adjacency list
         for(int i = 0; i < new_p_size; i++){
             elm = get_Pi(i);
-            update_adj_list(elm, new_p_size);
+            int cand_pivot_size = update_adj_list(elm, new_p_size);
+            if (cand_pivot_size> pivot_size){
+                child_max_pivot = elm;
+                pivot_size = cand_pivot_size;
+            }
 
         }
         for(int i = 0; i< new_x_size; i++){
             elm = get_Xi(i);
-            update_adj_list(elm, new_p_size);
+            int cand_pivot_size = update_adj_list(elm, new_p_size);
+            if (cand_pivot_size> pivot_size){
+                child_max_pivot = elm;
+                pivot_size = cand_pivot_size;
+            }
         }
 
-        return X_P_Set(*this,new_x_size, new_p_size, org_undo_size);
+        return X_P_Set(*this,new_x_size, new_p_size, org_undo_size, child_max_pivot);
     };
     
-    void update_adj_list(int elm, int new_p_size, int rem_elm = -1){
+    int update_adj_list(int elm, int new_p_size, int rem_elm = -1){
         int till = 0;
         auto& edge_list = g.edges_list[elm];
         for (int j = 0; j < edge_list.size(); j++){
@@ -117,11 +130,11 @@ public:
                 swap(edge_list[till], edge_list[j]);
                 till++;
             }
-
             else if (!in_P(edge) && edge != rem_elm){
-                break;
+                return till;
             }
         }
+        return new_p_size;
     }
 
     int get_intersection_P_size(vector<int>& neighbours){return get_intersection_P_size(neighbours.data(), neighbours.size());}
@@ -291,6 +304,15 @@ public:
             do_swap(elm, get_Xi(0));
             P_start-=1;
         }
+    }
+
+
+
+    int  find_max_pivot(){
+        if (max_pivot != -1){
+            return max_pivot;
+        }
+        printf("for some reason max pivot not found\n");
     }
 
 

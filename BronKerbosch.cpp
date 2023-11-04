@@ -40,6 +40,9 @@ public:
     void solve(vector<int>& included, X_P_Set& XP){
         //XP.print_everything(included.size());
         if (XP.P_size == 0 && XP.X_size == 0){
+            #ifdef NO_X_MAINTAINANCE
+            if (!XP.checker.check_maximal(included)) return;
+            #endif
             report(included);
             return;
         }
