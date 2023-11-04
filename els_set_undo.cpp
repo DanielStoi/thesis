@@ -18,6 +18,9 @@ A  Currently used XP set implementation that stores an undo queue
 
 using namespace std;
 
+const string impl = "els_set_undo.cpp";
+
+
 class X_P_Set{
 public:
     //start with X->P

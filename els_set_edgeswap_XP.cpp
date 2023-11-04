@@ -18,6 +18,8 @@ THIS IS A VERSION OF X_P_edgeswap which reshuffles X,P at the front instead of j
 
 using namespace std;
 
+const string impl = "els_set_edgeswap_XP.cpp";
+
 class X_P_Set{
 public:
     //start with X->P

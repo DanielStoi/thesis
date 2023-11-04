@@ -92,7 +92,7 @@ int main(int argc, char** argv){
         printf("invalid type: %s\n",argv[2]);
         return 0;
     }
-
+    cout << "impl: "<< impl << endl;
     printf("found %d cliques\n", ans);
     cout<<"time taken: "<< (double)(clock() - t)/CLOCKS_PER_SEC << endl;
     return 0;

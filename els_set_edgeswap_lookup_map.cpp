@@ -6,6 +6,7 @@
 
 using namespace std;
 
+const string impl = "els_set_edgeswap_lookup_map.cpp";
 
 #define SMART_INTERSECTION_CHOICE
 #define EDGESWAP

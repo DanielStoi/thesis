@@ -5,13 +5,15 @@
 
 //#include "els_set_lookup_map.cpp"
 
-#include "els_set_lookup_map_no_X.cpp"
+//#include "els_set_lookup_map_no_X.cpp"
 
 //#include "els_set_no_X.cpp"
 
 //#include "els_set_undo.cpp"
 
 //#include "els_set_edgeswap.cpp"
+
+#include "els_set_edgeswap_save_max_pivot.cpp"
 
 //#include "els_set_edgeswap_P_only.cpp"
 
