@@ -5,6 +5,8 @@ g++ run/run_algs.cpp
 
 this combines all version of the algorithm in which command line arguments can be used to specify the target dataset and exact algorithm
 
+read comments in run_algs.cpp for additional reference
+
 
 # configs:
 
