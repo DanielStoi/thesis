@@ -10,7 +10,7 @@ using namespace std;
 
 
 //remove or add define to switch between hashmap and list implementations
-//#define USE_HASHMAP_ELS_SET_LOOKUP
+#define USE_HASHMAP_ELS_SET_LOOKUP
 
 
 

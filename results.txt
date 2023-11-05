@@ -1,0 +1,1110 @@
+
+-----------------------
+running A on brock200_v2
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 200 vertixes and 19752 edges
+correctness: true on 200 vertexes
+ordered 200 elements, degeneracy: 84
+created
+impl: els_set_edgeswap_lookup_map.cpp
+found 431586 cliques
+time taken: 2.71581
+-----------------------
+running A on graph_bio-diseasome
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 516 vertixes and 2376 edges
+correctness: true on 516 vertexes
+ordered 516 elements, degeneracy: 10
+created
+impl: els_set_edgeswap_lookup_map.cpp
+found 301 cliques
+time taken: 0.014382
+-----------------------
+running A on graph_ia-email-EU
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 32430 vertixes and 108794 edges
+correctness: true on 32430 vertexes
+ordered 32430 elements, degeneracy: 22
+created
+impl: els_set_edgeswap_lookup_map.cpp
+found 49163 cliques
+time taken: 52.4456
+-----------------------
+running A on graph_scc_retweet
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1206 vertixes and 131980 edges
+correctness: true on 1206 vertexes
+ordered 1206 elements, degeneracy: 174
+created
+impl: els_set_edgeswap_lookup_map.cpp
+found 7851 cliques
+time taken: 11.8261
+-----------------------
+running A on graph_web-spam
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 4767 vertixes and 74750 edges
+correctness: true on 4767 vertexes
+ordered 4767 elements, degeneracy: 35
+created
+impl: els_set_edgeswap_lookup_map.cpp
+found 64228 cliques
+time taken: 1.56868
+-----------------------
+running A on graph_bio-dmela
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 7393 vertixes and 51138 edges
+correctness: true on 7393 vertexes
+ordered 7393 elements, degeneracy: 11
+created
+impl: els_set_edgeswap_lookup_map.cpp
+found 23545 cliques
+time taken: 2.78742
+-----------------------
+running A on graph_rec-amazon
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 91813 vertixes and 251408 edges
+correctness: true on 91813 vertexes
+ordered 91813 elements, degeneracy: 4
+created
+impl: els_set_edgeswap_lookup_map.cpp
+found 80974 cliques
+time taken: 850.226
+-----------------------
+running A on graph_scc_rt_occupywallstnyc
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 127 vertixes and 1862 edges
+correctness: true on 127 vertexes
+ordered 127 elements, degeneracy: 17
+created
+impl: els_set_edgeswap_lookup_map.cpp
+found 98 cliques
+time taken: 0.012259
+-----------------------
+running A on graph_web-wikipedia2009
+-----------------------
+running A on graph_soc-youtube
+-----------------------
+running B on brock200_v2
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 200 vertixes and 19752 edges
+correctness: true on 200 vertexes
+ordered 200 elements, degeneracy: 84
+created
+impl: els_set_lookup_map.cpp
+found 431586 cliques
+time taken: 1.42042
+-----------------------
+running B on graph_bio-diseasome
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 516 vertixes and 2376 edges
+correctness: true on 516 vertexes
+ordered 516 elements, degeneracy: 10
+created
+impl: els_set_lookup_map.cpp
+found 301 cliques
+time taken: 0.00415
+-----------------------
+running B on graph_ia-email-EU
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 32430 vertixes and 108794 edges
+correctness: true on 32430 vertexes
+ordered 32430 elements, degeneracy: 22
+created
+impl: els_set_lookup_map.cpp
+found 49163 cliques
+time taken: 1.44389
+-----------------------
+running B on graph_scc_retweet
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1206 vertixes and 131980 edges
+correctness: true on 1206 vertexes
+ordered 1206 elements, degeneracy: 174
+created
+impl: els_set_lookup_map.cpp
+found 7851 cliques
+time taken: 3.38296
+-----------------------
+running B on graph_web-spam
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 4767 vertixes and 74750 edges
+correctness: true on 4767 vertexes
+ordered 4767 elements, degeneracy: 35
+created
+impl: els_set_lookup_map.cpp
+found 64228 cliques
+time taken: 0.241335
+-----------------------
+running B on graph_bio-dmela
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 7393 vertixes and 51138 edges
+correctness: true on 7393 vertexes
+ordered 7393 elements, degeneracy: 11
+created
+impl: els_set_lookup_map.cpp
+found 23545 cliques
+time taken: 0.108541
+-----------------------
+running B on graph_rec-amazon
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 91813 vertixes and 251408 edges
+correctness: true on 91813 vertexes
+ordered 91813 elements, degeneracy: 4
+created
+impl: els_set_lookup_map.cpp
+found 80974 cliques
+time taken: 11.0945
+-----------------------
+running B on graph_scc_rt_occupywallstnyc
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 127 vertixes and 1862 edges
+correctness: true on 127 vertexes
+ordered 127 elements, degeneracy: 17
+created
+impl: els_set_lookup_map.cpp
+found 98 cliques
+time taken: 0.004803
+-----------------------
+running B on graph_web-wikipedia2009
+-----------------------
+running B on graph_soc-youtube
+-----------------------
+running C on brock200_v2
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 200 vertixes and 19752 edges
+correctness: true on 200 vertexes
+ordered 200 elements, degeneracy: 84
+created
+impl: els_set_lookup_map_no_X.cpp
+found 431586 cliques
+time taken: 5.91903
+-----------------------
+running C on graph_bio-diseasome
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 516 vertixes and 2376 edges
+correctness: true on 516 vertexes
+ordered 516 elements, degeneracy: 10
+created
+impl: els_set_lookup_map_no_X.cpp
+found 301 cliques
+time taken: 0.004601
+-----------------------
+running C on graph_ia-email-EU
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 32430 vertixes and 108794 edges
+correctness: true on 32430 vertexes
+ordered 32430 elements, degeneracy: 22
+created
+impl: els_set_lookup_map_no_X.cpp
+found 49163 cliques
+time taken: 1.68954
+-----------------------
+running C on graph_scc_retweet
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1206 vertixes and 131980 edges
+correctness: true on 1206 vertexes
+ordered 1206 elements, degeneracy: 174
+created
+impl: els_set_lookup_map_no_X.cpp
+found 7851 cliques
+time taken: 7.13431
+-----------------------
+running C on graph_web-spam
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 4767 vertixes and 74750 edges
+correctness: true on 4767 vertexes
+ordered 4767 elements, degeneracy: 35
+created
+impl: els_set_lookup_map_no_X.cpp
+found 64228 cliques
+time taken: 1.46599
+-----------------------
+running C on graph_bio-dmela
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 7393 vertixes and 51138 edges
+correctness: true on 7393 vertexes
+ordered 7393 elements, degeneracy: 11
+created
+impl: els_set_lookup_map_no_X.cpp
+found 23545 cliques
+time taken: 0.131239
+-----------------------
+running C on graph_rec-amazon
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 91813 vertixes and 251408 edges
+correctness: true on 91813 vertexes
+ordered 91813 elements, degeneracy: 4
+created
+impl: els_set_lookup_map_no_X.cpp
+found 80974 cliques
+time taken: 11.1267
+-----------------------
+running C on graph_scc_rt_occupywallstnyc
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 127 vertixes and 1862 edges
+correctness: true on 127 vertexes
+ordered 127 elements, degeneracy: 17
+created
+impl: els_set_lookup_map_no_X.cpp
+found 98 cliques
+time taken: 0.005311
+-----------------------
+running C on graph_web-wikipedia2009
+-----------------------
+running C on graph_soc-youtube
+-----------------------
+running D on brock200_v2
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 200 vertixes and 19752 edges
+correctness: true on 200 vertexes
+ordered 200 elements, degeneracy: 84
+impl: els_set_no_X.cpp
+found 431586 cliques
+time taken: 13.6456
+-----------------------
+running D on graph_bio-diseasome
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 516 vertixes and 2376 edges
+correctness: true on 516 vertexes
+ordered 516 elements, degeneracy: 10
+impl: els_set_no_X.cpp
+found 301 cliques
+time taken: 0.001681
+-----------------------
+running D on graph_ia-email-EU
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 32430 vertixes and 108794 edges
+correctness: true on 32430 vertexes
+ordered 32430 elements, degeneracy: 22
+impl: els_set_no_X.cpp
+found 49163 cliques
+time taken: 0.601468
+-----------------------
+running D on graph_scc_retweet
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1206 vertixes and 131980 edges
+correctness: true on 1206 vertexes
+ordered 1206 elements, degeneracy: 174
+impl: els_set_no_X.cpp
+found 7851 cliques
+time taken: 24.3806
+-----------------------
+running D on graph_web-spam
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 4767 vertixes and 74750 edges
+correctness: true on 4767 vertexes
+ordered 4767 elements, degeneracy: 35
+impl: els_set_no_X.cpp
+found 64228 cliques
+time taken: 2.49423
+-----------------------
+running D on graph_bio-dmela
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 7393 vertixes and 51138 edges
+correctness: true on 7393 vertexes
+ordered 7393 elements, degeneracy: 11
+impl: els_set_no_X.cpp
+found 23545 cliques
+time taken: 0.049951
+-----------------------
+running D on graph_rec-amazon
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 91813 vertixes and 251408 edges
+correctness: true on 91813 vertexes
+ordered 91813 elements, degeneracy: 4
+impl: els_set_no_X.cpp
+found 80974 cliques
+time taken: 0.141187
+-----------------------
+running D on graph_scc_rt_occupywallstnyc
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 127 vertixes and 1862 edges
+correctness: true on 127 vertexes
+ordered 127 elements, degeneracy: 17
+impl: els_set_no_X.cpp
+found 98 cliques
+time taken: 0.013075
+-----------------------
+running D on graph_web-wikipedia2009
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1864433 vertixes and 9014630 edges
+correctness: true on 1864433 vertexes
+ordered 1864433 elements, degeneracy: 66
+impl: els_set_no_X.cpp
+found 3570958 cliques
+time taken: 27.4394
+-----------------------
+running D on graph_soc-youtube
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 495957 vertixes and 3873496 edges
+correctness: true on 495957 vertexes
+ordered 495957 elements, degeneracy: 49
+impl: els_set_no_X.cpp
+found 2179313 cliques
+time taken: 228.327
+-----------------------
+running E on brock200_v2
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 200 vertixes and 19752 edges
+correctness: true on 200 vertexes
+ordered 200 elements, degeneracy: 84
+impl: els_set_undo.cpp
+found 431586 cliques
+time taken: 7.17271
+-----------------------
+running E on graph_bio-diseasome
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 516 vertixes and 2376 edges
+correctness: true on 516 vertexes
+ordered 516 elements, degeneracy: 10
+impl: els_set_undo.cpp
+found 301 cliques
+time taken: 0.001421
+-----------------------
+running E on graph_ia-email-EU
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 32430 vertixes and 108794 edges
+correctness: true on 32430 vertexes
+ordered 32430 elements, degeneracy: 22
+impl: els_set_undo.cpp
+found 49163 cliques
+time taken: 0.572289
+-----------------------
+running E on graph_scc_retweet
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1206 vertixes and 131980 edges
+correctness: true on 1206 vertexes
+ordered 1206 elements, degeneracy: 174
+impl: els_set_undo.cpp
+found 7851 cliques
+time taken: 11.1158
+-----------------------
+running E on graph_web-spam
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 4767 vertixes and 74750 edges
+correctness: true on 4767 vertexes
+ordered 4767 elements, degeneracy: 35
+impl: els_set_undo.cpp
+found 64228 cliques
+time taken: 1.35083
+-----------------------
+running E on graph_bio-dmela
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 7393 vertixes and 51138 edges
+correctness: true on 7393 vertexes
+ordered 7393 elements, degeneracy: 11
+impl: els_set_undo.cpp
+found 23545 cliques
+time taken: 0.048492
+-----------------------
+running E on graph_rec-amazon
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 91813 vertixes and 251408 edges
+correctness: true on 91813 vertexes
+ordered 91813 elements, degeneracy: 4
+impl: els_set_undo.cpp
+found 80974 cliques
+time taken: 0.136686
+-----------------------
+running E on graph_scc_rt_occupywallstnyc
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 127 vertixes and 1862 edges
+correctness: true on 127 vertexes
+ordered 127 elements, degeneracy: 17
+impl: els_set_undo.cpp
+found 98 cliques
+time taken: 0.012303
+-----------------------
+running E on graph_web-wikipedia2009
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1864433 vertixes and 9014630 edges
+correctness: true on 1864433 vertexes
+ordered 1864433 elements, degeneracy: 66
+impl: els_set_undo.cpp
+found 3570958 cliques
+time taken: 21.1551
+-----------------------
+running E on graph_soc-youtube
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 495957 vertixes and 3873496 edges
+correctness: true on 495957 vertexes
+ordered 495957 elements, degeneracy: 49
+impl: els_set_undo.cpp
+found 2179313 cliques
+time taken: 134.253
+-----------------------
+running F on brock200_v2
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 200 vertixes and 19752 edges
+correctness: true on 200 vertexes
+ordered 200 elements, degeneracy: 84
+impl: els_set_edgeswap.cpp
+found 431586 cliques
+time taken: 4.22304
+-----------------------
+running F on graph_bio-diseasome
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 516 vertixes and 2376 edges
+correctness: true on 516 vertexes
+ordered 516 elements, degeneracy: 10
+impl: els_set_edgeswap.cpp
+found 301 cliques
+time taken: 0.029459
+-----------------------
+running F on graph_ia-email-EU
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 32430 vertixes and 108794 edges
+correctness: true on 32430 vertexes
+ordered 32430 elements, degeneracy: 22
+impl: els_set_edgeswap.cpp
+found 49163 cliques
+time taken: 53.5992
+-----------------------
+running F on graph_scc_retweet
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1206 vertixes and 131980 edges
+correctness: true on 1206 vertexes
+ordered 1206 elements, degeneracy: 174
+impl: els_set_edgeswap.cpp
+found 7851 cliques
+time taken: 12.1668
+-----------------------
+running F on graph_web-spam
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 4767 vertixes and 74750 edges
+correctness: true on 4767 vertexes
+ordered 4767 elements, degeneracy: 35
+impl: els_set_edgeswap.cpp
+found 64228 cliques
+time taken: 5.37215
+-----------------------
+running F on graph_bio-dmela
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 7393 vertixes and 51138 edges
+correctness: true on 7393 vertexes
+ordered 7393 elements, degeneracy: 11
+impl: els_set_edgeswap.cpp
+found 23545 cliques
+time taken: 5.26118
+-----------------------
+running F on graph_rec-amazon
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 91813 vertixes and 251408 edges
+correctness: true on 91813 vertexes
+ordered 91813 elements, degeneracy: 4
+impl: els_set_edgeswap.cpp
+found 80974 cliques
+time taken: 395.092
+-----------------------
+running F on graph_scc_rt_occupywallstnyc
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 127 vertixes and 1862 edges
+correctness: true on 127 vertexes
+ordered 127 elements, degeneracy: 17
+impl: els_set_edgeswap.cpp
+found 98 cliques
+time taken: 0.006373
+-----------------------
+running F on graph_web-wikipedia2009
+-----------------------
+running F on graph_soc-youtube
+-----------------------
+running G on brock200_v2
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 200 vertixes and 19752 edges
+correctness: true on 200 vertexes
+ordered 200 elements, degeneracy: 84
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 431586 cliques
+time taken: 4.0094
+-----------------------
+running G on graph_bio-diseasome
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 516 vertixes and 2376 edges
+correctness: true on 516 vertexes
+ordered 516 elements, degeneracy: 10
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 301 cliques
+time taken: 0.030325
+-----------------------
+running G on graph_ia-email-EU
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 32430 vertixes and 108794 edges
+correctness: true on 32430 vertexes
+ordered 32430 elements, degeneracy: 22
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 49163 cliques
+time taken: 54.9714
+-----------------------
+running G on graph_scc_retweet
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1206 vertixes and 131980 edges
+correctness: true on 1206 vertexes
+ordered 1206 elements, degeneracy: 174
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 7851 cliques
+time taken: 10.6293
+-----------------------
+running G on graph_web-spam
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 4767 vertixes and 74750 edges
+correctness: true on 4767 vertexes
+ordered 4767 elements, degeneracy: 35
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 64228 cliques
+time taken: 5.40484
+-----------------------
+running G on graph_bio-dmela
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 7393 vertixes and 51138 edges
+correctness: true on 7393 vertexes
+ordered 7393 elements, degeneracy: 11
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 23545 cliques
+time taken: 5.34437
+-----------------------
+running G on graph_rec-amazon
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 91813 vertixes and 251408 edges
+correctness: true on 91813 vertexes
+ordered 91813 elements, degeneracy: 4
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 80974 cliques
+time taken: 405.926
+-----------------------
+running G on graph_scc_rt_occupywallstnyc
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 127 vertixes and 1862 edges
+correctness: true on 127 vertexes
+ordered 127 elements, degeneracy: 17
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 98 cliques
+time taken: 0.015335
+-----------------------
+running G on graph_web-wikipedia2009
+-----------------------
+running G on graph_soc-youtube
+-----------------------
+running H on brock200_v2
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 200 vertixes and 19752 edges
+correctness: true on 200 vertexes
+ordered 200 elements, degeneracy: 84
+impl: els_set_edgeswap_P_only.cpp
+found 431586 cliques
+time taken: 4.45404
+-----------------------
+running H on graph_bio-diseasome
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 516 vertixes and 2376 edges
+correctness: true on 516 vertexes
+ordered 516 elements, degeneracy: 10
+impl: els_set_edgeswap_P_only.cpp
+found 301 cliques
+time taken: 0.031991
+-----------------------
+running H on graph_ia-email-EU
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 32430 vertixes and 108794 edges
+correctness: true on 32430 vertexes
+ordered 32430 elements, degeneracy: 22
+impl: els_set_edgeswap_P_only.cpp
+found 49163 cliques
+time taken: 52.735
+-----------------------
+running H on graph_scc_retweet
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1206 vertixes and 131980 edges
+correctness: true on 1206 vertexes
+ordered 1206 elements, degeneracy: 174
+impl: els_set_edgeswap_P_only.cpp
+found 7851 cliques
+time taken: 16.1747
+-----------------------
+running H on graph_web-spam
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 4767 vertixes and 74750 edges
+correctness: true on 4767 vertexes
+ordered 4767 elements, degeneracy: 35
+impl: els_set_edgeswap_P_only.cpp
+found 64228 cliques
+time taken: 5.3881
+-----------------------
+running H on graph_bio-dmela
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 7393 vertixes and 51138 edges
+correctness: true on 7393 vertexes
+ordered 7393 elements, degeneracy: 11
+impl: els_set_edgeswap_P_only.cpp
+found 23545 cliques
+time taken: 5.26935
+-----------------------
+running H on graph_rec-amazon
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 91813 vertixes and 251408 edges
+correctness: true on 91813 vertexes
+ordered 91813 elements, degeneracy: 4
+impl: els_set_edgeswap_P_only.cpp
+found 80974 cliques
+time taken: 407.018
+-----------------------
+running H on graph_scc_rt_occupywallstnyc
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 127 vertixes and 1862 edges
+correctness: true on 127 vertexes
+ordered 127 elements, degeneracy: 17
+impl: els_set_edgeswap_P_only.cpp
+found 98 cliques
+time taken: 0.018485
+-----------------------
+running H on graph_web-wikipedia2009
+-----------------------
+running H on graph_soc-youtube
+-----------------------
+running I on brock200_v2
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 200 vertixes and 19752 edges
+correctness: true on 200 vertexes
+ordered 200 elements, degeneracy: 84
+impl: els_set_edgeswap_XP.cpp
+found 431586 cliques
+time taken: 2.55724
+-----------------------
+running I on graph_bio-diseasome
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 516 vertixes and 2376 edges
+correctness: true on 516 vertexes
+ordered 516 elements, degeneracy: 10
+impl: els_set_edgeswap_XP.cpp
+found 301 cliques
+time taken: 0.005025
+-----------------------
+running I on graph_ia-email-EU
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 32430 vertixes and 108794 edges
+correctness: true on 32430 vertexes
+ordered 32430 elements, degeneracy: 22
+impl: els_set_edgeswap_XP.cpp
+found 49163 cliques
+time taken: 0.275113
+-----------------------
+running I on graph_scc_retweet
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1206 vertixes and 131980 edges
+correctness: true on 1206 vertexes
+ordered 1206 elements, degeneracy: 174
+impl: els_set_edgeswap_XP.cpp
+found 7851 cliques
+time taken: 7.08134
+-----------------------
+running I on graph_web-spam
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 4767 vertixes and 74750 edges
+correctness: true on 4767 vertexes
+ordered 4767 elements, degeneracy: 35
+impl: els_set_edgeswap_XP.cpp
+found 64228 cliques
+time taken: 0.351489
+-----------------------
+running I on graph_bio-dmela
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 7393 vertixes and 51138 edges
+correctness: true on 7393 vertexes
+ordered 7393 elements, degeneracy: 11
+impl: els_set_edgeswap_XP.cpp
+found 23545 cliques
+time taken: 0.042245
+-----------------------
+running I on graph_rec-amazon
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 91813 vertixes and 251408 edges
+correctness: true on 91813 vertexes
+ordered 91813 elements, degeneracy: 4
+impl: els_set_edgeswap_XP.cpp
+found 80974 cliques
+time taken: 0.150945
+-----------------------
+running I on graph_scc_rt_occupywallstnyc
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 127 vertixes and 1862 edges
+correctness: true on 127 vertexes
+ordered 127 elements, degeneracy: 17
+impl: els_set_edgeswap_XP.cpp
+found 98 cliques
+time taken: 0.011288
+-----------------------
+running I on graph_web-wikipedia2009
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1864433 vertixes and 9014630 edges
+correctness: true on 1864433 vertexes
+ordered 1864433 elements, degeneracy: 66
+impl: els_set_edgeswap_XP.cpp
+found 3570958 cliques
+time taken: 14.2514
+-----------------------
+running I on graph_soc-youtube
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 495957 vertixes and 3873496 edges
+correctness: true on 495957 vertexes
+ordered 495957 elements, degeneracy: 49
+impl: els_set_edgeswap_XP.cpp
+found 2179313 cliques
+time taken: 35.3669
+-----------------------
+running J on brock200_v2
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 200 vertixes and 19752 edges
+correctness: true on 200 vertexes
+ordered 200 elements, degeneracy: 84
+impl: XP_set_naive.cpp
+found 431586 cliques
+time taken: 55.8629
+-----------------------
+running J on graph_bio-diseasome
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 516 vertixes and 2376 edges
+correctness: true on 516 vertexes
+ordered 516 elements, degeneracy: 10
+impl: XP_set_naive.cpp
+found 301 cliques
+time taken: 0.019991
+-----------------------
+running J on graph_ia-email-EU
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 32430 vertixes and 108794 edges
+correctness: true on 32430 vertexes
+ordered 32430 elements, degeneracy: 22
+impl: XP_set_naive.cpp
+found 49163 cliques
+time taken: 4.73922
+-----------------------
+running J on graph_scc_retweet
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1206 vertixes and 131980 edges
+correctness: true on 1206 vertexes
+ordered 1206 elements, degeneracy: 174
+impl: XP_set_naive.cpp
+found 7851 cliques
+time taken: 98.8509
+-----------------------
+running J on graph_web-spam
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 4767 vertixes and 74750 edges
+correctness: true on 4767 vertexes
+ordered 4767 elements, degeneracy: 35
+impl: XP_set_naive.cpp
+found 64228 cliques
+time taken: 10.8033
+-----------------------
+running J on graph_bio-dmela
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 7393 vertixes and 51138 edges
+correctness: true on 7393 vertexes
+ordered 7393 elements, degeneracy: 11
+impl: XP_set_naive.cpp
+found 23545 cliques
+time taken: 0.334563
+-----------------------
+running J on graph_rec-amazon
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 91813 vertixes and 251408 edges
+correctness: true on 91813 vertexes
+ordered 91813 elements, degeneracy: 4
+impl: XP_set_naive.cpp
+found 80974 cliques
+time taken: 0.652453
+-----------------------
+running J on graph_scc_rt_occupywallstnyc
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 127 vertixes and 1862 edges
+correctness: true on 127 vertexes
+ordered 127 elements, degeneracy: 17
+impl: XP_set_naive.cpp
+found 98 cliques
+time taken: 0.037126
+-----------------------
+running J on graph_web-wikipedia2009
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1864433 vertixes and 9014630 edges
+correctness: true on 1864433 vertexes
+ordered 1864433 elements, degeneracy: 66
+impl: XP_set_naive.cpp
+found 3570958 cliques
+time taken: 145.955
+-----------------------
+running J on graph_soc-youtube
+-----------------------
+running K on brock200_v2
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 200 vertixes and 19752 edges
+correctness: true on 200 vertexes
+ordered 200 elements, degeneracy: 84
+created
+impl: els_set_lookup_map.cpp
+found 431586 cliques
+time taken: 5.07916
+-----------------------
+running K on graph_bio-diseasome
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 516 vertixes and 2376 edges
+correctness: true on 516 vertexes
+ordered 516 elements, degeneracy: 10
+created
+impl: els_set_lookup_map.cpp
+found 301 cliques
+time taken: 0.003346
+-----------------------
+running K on graph_ia-email-EU
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 32430 vertixes and 108794 edges
+correctness: true on 32430 vertexes
+ordered 32430 elements, degeneracy: 22
+created
+impl: els_set_lookup_map.cpp
+found 49163 cliques
+time taken: 0.290954
+-----------------------
+running K on graph_scc_retweet
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1206 vertixes and 131980 edges
+correctness: true on 1206 vertexes
+ordered 1206 elements, degeneracy: 174
+created
+impl: els_set_lookup_map.cpp
+found 7851 cliques
+time taken: 42.1064
+-----------------------
+running K on graph_web-spam
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 4767 vertixes and 74750 edges
+correctness: true on 4767 vertexes
+ordered 4767 elements, degeneracy: 35
+created
+impl: els_set_lookup_map.cpp
+found 64228 cliques
+time taken: 0.920386
+-----------------------
+running K on graph_bio-dmela
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 7393 vertixes and 51138 edges
+correctness: true on 7393 vertexes
+ordered 7393 elements, degeneracy: 11
+created
+impl: els_set_lookup_map.cpp
+found 23545 cliques
+time taken: 0.093228
+-----------------------
+running K on graph_rec-amazon
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 91813 vertixes and 251408 edges
+correctness: true on 91813 vertexes
+ordered 91813 elements, degeneracy: 4
+created
+impl: els_set_lookup_map.cpp
+found 80974 cliques
+time taken: 0.31521
+-----------------------
+running K on graph_scc_rt_occupywallstnyc
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 127 vertixes and 1862 edges
+correctness: true on 127 vertexes
+ordered 127 elements, degeneracy: 17
+created
+impl: els_set_lookup_map.cpp
+found 98 cliques
+time taken: 0.019819
+-----------------------
+running K on graph_web-wikipedia2009
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1864433 vertixes and 9014630 edges
+correctness: true on 1864433 vertexes
+ordered 1864433 elements, degeneracy: 66
+created
+impl: els_set_lookup_map.cpp
+found 3570958 cliques
+time taken: 23.5488
+-----------------------
+running K on graph_soc-youtube
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 495957 vertixes and 3873496 edges
+correctness: true on 495957 vertexes
+ordered 495957 elements, degeneracy: 49
+created
+impl: els_set_lookup_map.cpp
+found 2179313 cliques
+time taken: 26.3445
+-----------------------
+running L on brock200_v2
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 200 vertixes and 19752 edges
+correctness: true on 200 vertexes
+ordered 200 elements, degeneracy: 84
+created
+impl: els_set_lookup_map_no_X.cpp
+found 431586 cliques
+time taken: 9.70712
+-----------------------
+running L on graph_bio-diseasome
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 516 vertixes and 2376 edges
+correctness: true on 516 vertexes
+ordered 516 elements, degeneracy: 10
+created
+impl: els_set_lookup_map_no_X.cpp
+found 301 cliques
+time taken: 0.004219
+-----------------------
+running L on graph_ia-email-EU
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 32430 vertixes and 108794 edges
+correctness: true on 32430 vertexes
+ordered 32430 elements, degeneracy: 22
+created
+impl: els_set_lookup_map_no_X.cpp
+found 49163 cliques
+time taken: 0.933357
+-----------------------
+running L on graph_scc_retweet
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1206 vertixes and 131980 edges
+correctness: true on 1206 vertexes
+ordered 1206 elements, degeneracy: 174
+created
+impl: els_set_lookup_map_no_X.cpp
+found 7851 cliques
+time taken: 46.0701
+-----------------------
+running L on graph_web-spam
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 4767 vertixes and 74750 edges
+correctness: true on 4767 vertexes
+ordered 4767 elements, degeneracy: 35
+created
+impl: els_set_lookup_map_no_X.cpp
+found 64228 cliques
+time taken: 2.2208
+-----------------------
+running L on graph_bio-dmela
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 7393 vertixes and 51138 edges
+correctness: true on 7393 vertexes
+ordered 7393 elements, degeneracy: 11
+created
+impl: els_set_lookup_map_no_X.cpp
+found 23545 cliques
+time taken: 0.152425
+-----------------------
+running L on graph_rec-amazon
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 91813 vertixes and 251408 edges
+correctness: true on 91813 vertexes
+ordered 91813 elements, degeneracy: 4
+created
+impl: els_set_lookup_map_no_X.cpp
+found 80974 cliques
+time taken: 0.380262
+-----------------------
+running L on graph_scc_rt_occupywallstnyc
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 127 vertixes and 1862 edges
+correctness: true on 127 vertexes
+ordered 127 elements, degeneracy: 17
+created
+impl: els_set_lookup_map_no_X.cpp
+found 98 cliques
+time taken: 0.01922
+-----------------------
+running L on graph_web-wikipedia2009
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1864433 vertixes and 9014630 edges
+correctness: true on 1864433 vertexes
+ordered 1864433 elements, degeneracy: 66
+created
+impl: els_set_lookup_map_no_X.cpp
+found 3570958 cliques
+time taken: 75.8347
+-----------------------
+running L on graph_soc-youtube
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 495957 vertixes and 3873496 edges
+correctness: true on 495957 vertexes
+ordered 495957 elements, degeneracy: 49
+created
+impl: els_set_lookup_map_no_X.cpp
+found 2179313 cliques
+time taken: 158.836
+-----------------------
+running run_algs on brock200_v2
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 200 vertixes and 19752 edges
+correctness: true on 200 vertexes
+ordered 200 elements, degeneracy: 84
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 431586 cliques
+time taken: 3.98068
+-----------------------
+running run_algs on graph_bio-diseasome
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 516 vertixes and 2376 edges
+correctness: true on 516 vertexes
+ordered 516 elements, degeneracy: 10
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 301 cliques
+time taken: 0.019218
+-----------------------
+running run_algs on graph_ia-email-EU
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 32430 vertixes and 108794 edges
+correctness: true on 32430 vertexes
+ordered 32430 elements, degeneracy: 22
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 49163 cliques
+time taken: 53.8953
+-----------------------
+running run_algs on graph_scc_retweet
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 1206 vertixes and 131980 edges
+correctness: true on 1206 vertexes
+ordered 1206 elements, degeneracy: 174
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 7851 cliques
+time taken: 10.6019
+-----------------------
+running run_algs on graph_web-spam
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 4767 vertixes and 74750 edges
+correctness: true on 4767 vertexes
+ordered 4767 elements, degeneracy: 35
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 64228 cliques
+time taken: 5.39686
+-----------------------
+running run_algs on graph_bio-dmela
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 7393 vertixes and 51138 edges
+correctness: true on 7393 vertexes
+ordered 7393 elements, degeneracy: 11
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 23545 cliques
+time taken: 5.32172
+-----------------------
+running run_algs on graph_rec-amazon
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 91813 vertixes and 251408 edges
+correctness: true on 91813 vertexes
+ordered 91813 elements, degeneracy: 4
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 80974 cliques
+time taken: 403.103
+-----------------------
+running run_algs on graph_scc_rt_occupywallstnyc
+# Start reading graph, Require files "b_degree.bin" and "b_adj.bin"
+# Reading graph with 127 vertixes and 1862 edges
+correctness: true on 127 vertexes
+ordered 127 elements, degeneracy: 17
+impl: els_set_edgeswap_save_max_pivot.cpp
+found 98 cliques
+time taken: 0.005987
+-----------------------
+running run_algs on graph_web-wikipedia2009
+-----------------------
+running run_algs on graph_soc-youtube

@@ -13,10 +13,12 @@
 
 //#include "els_set_edgeswap.cpp"
 
-#include "els_set_edgeswap_save_max_pivot.cpp"
+//#include "els_set_edgeswap_save_max_pivot.cpp"
 
 //#include "els_set_edgeswap_P_only.cpp"
 
 //#include "els_set_edgeswap_XP.cpp"
 
-//#include "XP_set_naive.cpp"
+
+
+#include "XP_set_naive.cpp"

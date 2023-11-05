@@ -18,6 +18,8 @@ naive, inefficient XP set implementation using:
 
 using namespace std;
 
+const string impl = "XP_set_naive.cpp";
+
 class X_P_Set{
 public:
     //start with X->P
